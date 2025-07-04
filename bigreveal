@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Reveal URL Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Roboto:wght@300;400;500;700&family=Lora:wght@400;500;600;700&family=Pacifico&family=Crimson+Text:wght@400;600&family=Sacramento&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none !important;
+      border-color: #ffb88d !important;
+      box-shadow: 0 0 0 3px rgba(255, 184, 141, 0.2) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-8" style="background-color: #ffe4b7;">
+
+  <!-- Password Protection Screen -->
+  <div id="passwordScreen" class="max-w-md mx-auto">
+    <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+      <div class="mb-6">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background-color: #ffb88d;">
+          <svg class="w-8 h-8" style="color: #1f2937;" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2h1a2 2 0 012 2v5a2 2 0 01-2 2H4a2 2 0 01-2-2v-5a2 2 0 012-2h1zm2-2a3 3 0 116 0v2H7V7z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold mb-2" style="color: #1f2937;">Access Required</h1>
+        <p class="text-gray-600">To access this template, please type in the code found in your purchase PDF.</p>
+      </div>
+
+      <form id="passwordForm" class="space-y-4">
+        <div>
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter access code"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center font-mono text-lg tracking-wider focus:ring-2 transition-all"
+            maxlength="10"
+            autocomplete="off"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+          style="background-color: #c0dcca; color: #1f2937;"
+          onmouseover="this.style.backgroundColor='#a8d0b5'"
+          onmouseout="this.style.backgroundColor='#c0dcca'"
+        >
+          Access Template
+        </button>
+
+        <div id="passwordError" class="text-red-500 text-sm hidden">
+          Incorrect code. Please check your purchase PDF and try again.
+        </div>
+
+        <p class="text-xs text-gray-500 mt-4">
+          If you need help, please message 
+          <a href="https://www.etsy.com/shop/JoyJotStudio" target="_blank" class="font-semibold hover:underline" style="color: #ffb88d;">Joy Jot Studio</a> 
+          on Etsy
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Application (Hidden Initially) -->
+  <div id="mainApp" class="max-w-6xl mx-auto px-4 hidden">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-2" style="color: #1f2937;">Big Reveal Generator</h1>
+      <p style="color: #4b5563;">Create your personalized reveal page and get a shareable link!</p>
+    </div>
+
+    <!-- Context Information -->
+    <div class="rounded-lg p-4 mt-6 text-left max-w-4xl mx-auto" style="background-color: #b9dfc7; border: 1px solid #c0dcca;">
+      <h3 class="font-semibold mb-2" style="color: #000000;">How Your Reveal Works:</h3>
+      <div class="text-sm space-y-1" style="color: #000000;">
+        <p><strong>First:</strong> Visitors see spinning slot machine reels</p>
+        <p><strong>After the slots line up:</strong> Two reveal screens appear in sequence</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+<!-- Section 1: Colors & Styling -->
+<form id="revealForm" class="space-y-8">
+  <div class="bg-white rounded-2xl shadow-xl p-8">
+    <div class="flex items-center mb-6">
+      <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color: #ffb88d; color: #1f2937;">1</div>
+      <h2 class="text-2xl font-bold" style="color: #1f2937;">Colors & Styling</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <!-- Background Color -->
+      <div class="space-y-6">
+        <label for="color" class="block text-sm font-semibold text-gray-700 mb-2">
+          Background Theme <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="color"
+          name="color"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all mb-3"
+          style="focus:ring-color: #d98e72; focus:border-color: #d98e72;"
+        >
+          <option value="">Choose a theme...</option>
+          <option value="beige">Beige</option>
+          <option value="pink">Pink</option>
+          <option value="blue">Blue</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
+          <option value="purple">Purple</option>
+          <option value="gold">Gold</option>
+          <option value="white">White</option>
+          <option value="custom">Custom Color</option>
+        </select>
+
+        <div id="backgroundColorCustom" class="hidden">
+          <div class="flex items-center space-x-3">
+            <input
+              type="color"
+              id="backgroundColorPicker"
+              class="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer"
+              value="#eedec5"
+            />
+            <input
+              type="text"
+              id="backgroundColorHex"
+              placeholder="#eedec5"
+              pattern="^#([0-9A-Fa-f]{6})$"
+              class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+            />
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Use the color picker or enter a hex code</p>
+        </div>
+      </div>
+
+      <!-- Text Color -->
+      <div class="space-y-6">
+        <label for="textColor" class="block text-sm font-semibold text-gray-700 mb-2">
+          Text Color <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="textColor"
+          name="textColor"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all mb-3"
+        >
+          <option value="">Choose a color...</option>
+          <option value="#000000">Black</option>
+          <option value="#ffffff">White</option>
+          <option value="#374151">Dark Gray</option>
+          <option value="#6b7280">Gray</option>
+          <option value="#dc2626">Red</option>
+          <option value="#ea580c">Orange</option>
+          <option value="#ca8a04">Yellow</option>
+          <option value="#16a34a">Green</option>
+          <option value="#2563eb">Blue</option>
+          <option value="#7c3aed">Purple</option>
+          <option value="#8b4513">Brown</option>
+          <option value="#ff69b4">Pink</option>
+          <option value="custom">Custom Color</option>
+        </select>
+
+        <div id="textColorCustom" class="hidden">
+          <div class="flex items-center space-x-3">
+            <input
+              type="color"
+              id="textColorPicker"
+              class="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer"
+              value="#000000"
+            />
+            <input
+              type="text"
+              id="textColorHex"
+              placeholder="#000000"
+              pattern="^#([0-9A-Fa-f]{6})$"
+              class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+            />
+          </div>
+          <p class="text-xs text-gray-500 mt-1">Use the color picker or enter a hex code</p>
+        </div>
+      </div>
+
+      <!-- Outline Color -->
+      <div class="md:col-span-2 space-y-6">
+        <label for="outlineColor" class="block text-sm font-semibold text-gray-700 mb-2">
+          Text Outline Color <span class="text-red-500">*</span>
+        </label>
+        <select
+          id="outlineColor"
+          name="outlineColor"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+        >
+          <option value="">Choose a color...</option>
+          <option value="none">None</option>
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>
+      </div>
+    </div>
+  </div> 
+</form>
+<!-- Outline Color -->
+<div class="mt-8">
+  <label for="outlineColor" class="block text-sm font-semibold text-gray-700 mb-2">
+    Text Outline Color <span class="text-red-500">*</span>
+  </label>
+  <select id="outlineColor" name="outlineColor" required class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-all">
+    <option value="">Choose a color...</option>
+    <option value="transparent">None (Transparent)</option>
+    <option value="#ffffff">White</option>
+    <option value="#000000">Black</option>
+    <option value="#374151">Dark Gray</option>
+    <option value="#6b7280">Gray</option>
+    <option value="#dc2626">Red</option>
+    <option value="#ea580c">Orange</option>
+    <option value="#ca8a04">Yellow</option>
+    <option value="#16a34a">Green</option>
+    <option value="#2563eb">Blue</option>
+    <option value="#7c3aed">Purple</option>
+    <option value="#8b4513">Brown</option>
+    <option value="#ff69b4">Pink</option>
+    <option value="custom">Custom Color</option>
+  </select>
+
+  <div id="outlineColorCustom" class="hidden mt-3 space-y-2">
+    <div class="flex items-center space-x-3">
+      <input type="color" id="outlineColorPicker" value="#ffffff" class="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer">
+      <input type="text" id="outlineColorHex" placeholder="#ffffff" pattern="^#([0-9A-Fa-f]{6})$" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg">
+    </div>
+    <p class="text-xs text-gray-500">Use the color picker or enter a hex code</p>
+  </div>
+  <p class="text-xs text-gray-500 mt-1">Adds an outline around text for better readability</p>
+</div>
+
+<!-- Font Style -->
+<div class="mt-8">
+  <label for="font" class="block text-sm font-semibold text-gray-700 mb-2">
+    Font Style <span class="text-red-500">*</span>
+  </label>
+  <select id="font" name="font" required class="w-full px-4 py-3 border border-gray-300 rounded-lg transition-all">
+    <option value="">Choose a font...</option>
+    <option value="Poppins">Poppins (Modern & Clean)</option>
+    <option value="Playfair Display">Playfair Display (Elegant & Classic)</option>
+    <option value="Dancing Script">Dancing Script (Handwritten)</option>
+    <option value="Montserrat">Montserrat (Professional)</option>
+    <option value="Great Vibes">Great Vibes (Fancy Script)</option>
+    <option value="Roboto">Roboto (Simple & Clear)</option>
+    <option value="Lora">Lora (Readable & Warm)</option>
+    <option value="Pacifico">Pacifico (Fun & Casual)</option>
+    <option value="Crimson Text">Crimson Text (Traditional)</option>
+    <option value="Sacramento">Sacramento (Flowing Script)</option>
+  </select>
+  <p class="text-xs text-gray-500 mt-1">This font will be used across all your reveal text.</p>
+</div>
+<!-- Live Preview Panel -->
+<div class="hidden md:block mt-10">
+  <div class="bg-gray-100 rounded-lg p-6 h-80 flex flex-col items-center justify-center" id="colorPreview">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4">Live Preview</h3>
+    <div class="w-full h-full rounded-lg flex items-center justify-center relative overflow-hidden" id="previewBackground">
+      <div class="text-center" id="previewText">
+        <h1 class="text-3xl font-bold mb-2" style="font-family: 'Poppins', sans-serif;" id="previewMainText">Your Text Here</h1>
+        <p class="text-lg" style="font-family: 'Poppins', sans-serif;" id="previewSubText">This will be the style for the reveal</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Section 2: Main Announcement -->
+<div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color: #ffb88d; color: #1f2937;">2</div>
+    <h2 class="text-2xl font-bold text-gray-800">Main Announcement</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <div>
+      <label for="main" class="block text-sm font-semibold text-gray-700 mb-2">
+        Main Headline <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="main"
+        name="main"
+        required
+        placeholder="We're Expecting!"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+      >
+      <p class="text-xs text-gray-500 mt-1">This is the main message that will appear on your reveal page.</p>
+      <p class="text-xs font-medium mt-1 text-[#cadcca]">Note: This text will appear in ALL CAPS on your reveal page.</p>
+    </div>
+
+    <!-- Live Preview: Page 1 -->
+    <div class="hidden md:block">
+      <div class="bg-gray-100 rounded-lg p-6 h-64 flex flex-col items-center justify-center" id="section2Preview">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">Live Preview — Page 1</h3>
+        <div class="w-full h-full rounded-lg flex items-center justify-center relative overflow-hidden" id="preview2Background">
+          <div class="text-center" id="preview2Text">
+            <h1 class="text-4xl font-bold mb-2" style="font-family: 'Poppins', sans-serif; display: none;" id="preview2MainText"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Section 3: Additional Details -->
+<div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color: #ffb88d; color: #1f2937;">3</div>
+    <h2 class="text-2xl font-bold text-gray-800">Additional Details</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- Message 1 -->
+    <div>
+      <label for="sub" class="block text-sm font-semibold text-gray-700 mb-2">
+        Message 1 <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="sub"
+        name="sub"
+        required
+        placeholder="Baby Johnson"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+      >
+    </div>
+
+    <!-- Message 2 (optional) -->
+    <div>
+      <label for="date" class="block text-sm font-semibold text-gray-700 mb-2">
+        Message 2 <span class="text-gray-400">(optional)</span>
+      </label>
+      <input
+        type="text"
+        id="date"
+        name="date"
+        placeholder="Coming soon!"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+      >
+    </div>
+
+    <!-- Photo URL (optional) -->
+    <div class="md:col-span-2">
+      <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
+        Photo URL <span class="text-gray-400">(optional)</span>
+        <span class="inline-block relative ml-1 group cursor-help">
+          <span class="bg-gray-400 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center hover:bg-gray-500">?</span>
+          <div class="absolute left-0 top-6 bg-gray-800 text-white text-xs rounded-lg p-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 shadow-lg">
+            <p><strong>Steps to upload:</strong></p>
+            <ol class="list-decimal ml-4 space-y-1">
+              <li>Go to <strong>imgur.com/upload</strong></li>
+              <li>Drag and drop your photo onto the page</li>
+              <li>Copy the image link on the right</li>
+              <li>Paste it here</li>
+            </ol>
+          </div>
+        </span>
+      </label>
+      <input
+        type="url"
+        id="photo"
+        name="photo"
+        placeholder="https://i.imgur.com/yourimage.jpg"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+      >
+      <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
+    </div>
+
+    <!-- Ending Message (optional) -->
+    <div class="md:col-span-2">
+      <label for="from" class="block text-sm font-semibold text-gray-700 mb-2">
+        Ending Message <span class="text-gray-400">(optional)</span>
+      </label>
+      <input
+        type="text"
+        id="from"
+        name="from"
+        placeholder="Love, The Johnsons"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+      >
+    </div>
+  </div>
+
+  <!-- Page 2 Preview -->
+  <div class="hidden md:block mt-10">
+    <div class="bg-gray-100 rounded-lg p-6 h-80 flex flex-col items-center justify-center" id="section3Preview">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Live Preview — Page 2</h3>
+      <div class="w-full h-full rounded-lg flex items-center justify-center relative overflow-hidden" id="preview3Background">
+        <div class="text-center space-y-4" id="preview3Text">
+          <h2 class="text-2xl font-bold" style="font-family: 'Poppins', sans-serif; display: none;" id="preview3Message1"></h2>
+          <p class="text-lg" style="font-family: 'Poppins', sans-serif; display: none;" id="preview3Message2"></p>
+          <div class="mx-auto" id="preview3Photo" style="display: none;"></div>
+          <p class="text-base italic" style="font-family: 'Poppins', sans-serif; display: none;" id="preview3From"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Section 4: Generate Reveal URL -->
+<div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+  <button
+    type="submit"
+    form="revealForm"
+    class="w-full font-semibold py-4 px-6 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+    style="background-color: #cadcca; color: #1f2937;"
+    onmouseover="this.style.backgroundColor='#a8d0b5'"
+    onmouseout="this.style.backgroundColor='#cadcca'"
+  >
+    Generate My Reveal URL
+  </button>
+</div>
+
+<!-- Reveal URL Result -->
+<div id="urlResult" class="bg-white rounded-2xl shadow-xl p-8 mb-8 hidden">
+  <h2 class="text-2xl font-bold mb-4 text-gray-800">Your Reveal URL is Ready!</h2>
+  <div class="bg-gray-50 rounded-lg p-4 mb-4">
+    <p class="text-sm text-gray-600 mb-2">Your shareable link:</p>
+    <div class="flex items-center space-x-2">
+      <input
+        type="text"
+        id="generatedUrl"
+        readonly
+        class="flex-1 px-3 py-2 bg-white border border-gray-300 rounded text-sm font-mono"
+      >
+      <button
+        id="copyBtn"
+        type="button"
+        class="px-4 py-2 rounded transition-colors text-sm font-medium"
+        style="background-color: #cadcca; color: #1f2937;"
+        onmouseover="this.style.backgroundColor='#a8d0b5'"
+        onmouseout="this.style.backgroundColor='#cadcca'"
+      >
+        Copy
+      </button>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-3">
+    <a
+      id="previewBtn"
+      href="#"
+      target="_blank"
+      class="flex-1 text-center py-3 px-4 rounded-lg transition-colors font-medium"
+      style="background-color: #cadcca; color: #1f2937;"
+      onmouseover="this.style.backgroundColor='#a8d0b5'"
+      onmouseout="this.style.backgroundColor='#cadcca'"
+    >
+      Preview Page
+    </a>
+    <button
+      id="newRevealBtn"
+      type="button"
+      class="flex-1 py-3 px-4 rounded-lg transition-colors font-medium"
+      style="background-color: #cadcca; color: #1f2937;"
+      onmouseover="this.style.backgroundColor='#a8d0b5'"
+      onmouseout="this.style.backgroundColor='#cadcca'"
+    >
+      Create Another
+    </button>
+  </div>
+</div>
+<script>
+  const elements = {
+    backgroundColor: document.getElementById('backgroundColor'),
+    backgroundColorCustom: document.getElementById('backgroundColorCustom'),
+    backgroundColorPicker: document.getElementById('backgroundColorPicker'),
+    backgroundColorHex: document.getElementById('backgroundColorHex'),
+
+    textColor: document.getElementById('textColor'),
+    textColorCustom: document.getElementById('textColorCustom'),
+    textColorPicker: document.getElementById('textColorPicker'),
+    textColorHex: document.getElementById('textColorHex'),
+
+    outlineColor: document.getElementById('outlineColor'),
+    outlineColorCustom: document.getElementById('outlineColorCustom'),
+    outlineColorPicker: document.getElementById('outlineColorPicker'),
+    outlineColorHex: document.getElementById('outlineColorHex'),
+
+    font: document.getElementById('font'),
+
+    mainInput: document.getElementById('main'),
+    subInput: document.getElementById('sub'),
+    dateInput: document.getElementById('date'),
+    photoInput: document.getElementById('photo'),
+    fromInput: document.getElementById('from'),
+
+    // Preview targets
+    previewBackground: document.getElementById('previewBackground'),
+    previewMainText: document.getElementById('previewMainText'),
+    previewSubText: document.getElementById('previewSubText'),
+
+    preview2Background: document.getElementById('preview2Background'),
+    preview2MainText: document.getElementById('preview2MainText'),
+
+    preview3Background: document.getElementById('preview3Background'),
+    preview3Message1: document.getElementById('preview3Message1'),
+    preview3Message2: document.getElementById('preview3Message2'),
+    preview3Photo: document.getElementById('preview3Photo'),
+    preview3From: document.getElementById('preview3From'),
+  };
+
+  const themeColors = {
+    beige: '#f3ddbb',
+    pink: '#fccac5',
+    blue: '#add4fd',
+    yellow: '#fef3c7',
+    green: '#81a969',
+    purple: '#d2c5fc',
+    gold: '#ffdf9a',
+    white: '#ffffff',
+  };
+
+  function applyTextStyles(el, color, outline, font) {
+    if (!el) return;
+    el.style.color = color;
+    el.style.fontFamily = `'${font}', sans-serif`;
+    if (outline === 'transparent') {
+      el.style.textShadow = 'none';
+      el.style.webkitTextStroke = '0';
+    } else {
+      el.style.textShadow = `-1px -1px 0 ${outline}, 1px -1px 0 ${outline}, -1px 1px 0 ${outline}, 1px 1px 0 ${outline}`;
+      el.style.webkitTextStroke = `1px ${outline}`;
+    }
+  }
+
+  function updatePreview() {
+    const bgVal = elements.backgroundColor.value;
+    const textVal = elements.textColor.value;
+    const outlineVal = elements.outlineColor.value;
+    const fontVal = elements.font.value;
+
+    const bgColor = bgVal === 'custom' ? elements.backgroundColorHex.value : themeColors[bgVal] || '#f3ddbb';
+    const textColor = textVal === 'custom' ? elements.textColorHex.value : textVal || '#000000';
+    const outlineColor = outlineVal === 'custom' ? elements.outlineColorHex.value : outlineVal || 'transparent';
+
+    // Section 1
+    elements.previewBackground.style.backgroundColor = bgColor;
+    applyTextStyles(elements.previewMainText, textColor, outlineColor, fontVal);
+    applyTextStyles(elements.previewSubText, textColor, outlineColor, fontVal);
+    elements.previewMainText.textContent = elements.mainInput.value || 'Your Text Here';
+    elements.previewSubText.textContent = elements.subInput.value || 'This will be the style for the reveal';
+
+    // Section 2
+    elements.preview2Background.style.backgroundColor = bgColor;
+    const main = elements.mainInput.value.trim().toUpperCase();
+    elements.preview2MainText.textContent = main;
+    elements.preview2MainText.style.display = main ? 'block' : 'none';
+    applyTextStyles(elements.preview2MainText, textColor, outlineColor, fontVal);
+
+    // Section 3
+    elements.preview3Background.style.backgroundColor = bgColor;
+
+    const msg1 = elements.subInput.value.trim().toUpperCase();
+    elements.preview3Message1.textContent = msg1;
+    elements.preview3Message1.style.display = msg1 ? 'block' : 'none';
+    applyTextStyles(elements.preview3Message1, textColor, outlineColor, fontVal);
+
+    const msg2 = elements.dateInput.value.trim();
+    elements.preview3Message2.textContent = msg2;
+    elements.preview3Message2.style.display = msg2 ? 'block' : 'none';
+    applyTextStyles(elements.preview3Message2, textColor, outlineColor, fontVal);
+
+    const img = elements.photoInput.value.trim();
+    if (img) {
+      elements.preview3Photo.innerHTML = `<img src="${img}" alt="Preview" class="max-h-72 mx-auto rounded-lg">`;
+      elements.preview3Photo.style.display = 'flex';
+    } else {
+      elements.preview3Photo.innerHTML = '';
+      elements.preview3Photo.style.display = 'none';
+    }
+
+    const from = elements.fromInput.value.trim();
+    elements.preview3From.textContent = from;
+    elements.preview3From.style.display = from ? 'block' : 'none';
+    applyTextStyles(elements.preview3From, textColor, outlineColor, fontVal);
+  }
+
+  function toggleCustomField(selectEl, customWrapEl) {
+    customWrapEl.classList.toggle('hidden', selectEl.value !== 'custom');
+  }
+
+  // Event listeners
+  [
+    ['backgroundColor', 'backgroundColorCustom'],
+    ['textColor', 'textColorCustom'],
+    ['outlineColor', 'outlineColorCustom'],
+  ].forEach(([selectId, customId]) => {
+    const selectEl = elements[selectId];
+    const customEl = elements[customId];
+    if (selectEl && customEl) {
+      selectEl.addEventListener('change', () => {
+        toggleCustomField(selectEl, customEl);
+        updatePreview();
+      });
+    }
+  });
+
+  ['backgroundColorPicker', 'backgroundColorHex', 'textColorPicker', 'textColorHex', 'outlineColorPicker', 'outlineColorHex'].forEach(id => {
+    if (elements[id]) elements[id].addEventListener('input', updatePreview);
+  });
+
+  ['mainInput', 'subInput', 'dateInput', 'photoInput', 'fromInput', 'font'].forEach(key => {
+    if (elements[key]) elements[key].addEventListener('input', updatePreview);
+  });
+</script>
+ // Step 2: Form submission logic
+    document.getElementById('revealForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const params = new URLSearchParams();
+      const inputs = document.querySelectorAll('#revealForm input, #revealForm select');
+      inputs.forEach(input => {
+        if (input.name && input.value) {
+          params.set(input.name, input.value);
+        }
+      });
+      const url = `https://bigreveal.vercel.app?${params.toString()}`;
+      const output = document.getElementById('resultURL');
+      if (output) {
+        output.value = url;
+        output.classList.remove('hidden');
+        output.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert(url);
+      }
+    });
+  </script>
+</body>
+</html>
+// Step 3: Copy to clipboard logic
+    document.getElementById('copyBtn')?.addEventListener('click', function () {
+      const urlInput = document.getElementById('generatedUrl');
+      if (urlInput) {
+        urlInput.select();
+        document.execCommand('copy');
+        this.textContent = 'Copied!';
+        setTimeout(() => this.textContent = 'Copy', 2000);
+      }
+    });
+
+    // Step 3: Reset form for new reveal
+    document.getElementById('newRevealBtn')?.addEventListener('click', function () {
+      document.getElementById('revealForm').reset();
+      document.getElementById('urlResult').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+
+  // Step 4: Live preview logic
+    function updateLivePreview(id, targetId, transformFn = val => val.toUpperCase()) {
+      const input = document.getElementById(id);
+      const target = document.getElementById(targetId);
+      if (!input || !target) return;
+      input.addEventListener('input', () => {
+        const val = input.value.trim();
+        target.textContent = transformFn(val);
+        target.style.display = val ? 'block' : 'none';
+      });
+    }
+
+    updateLivePreview('main', 'preview2MainText');
+    updateLivePreview('msg1', 'preview3Msg1');
+    updateLivePreview('msg2', 'preview3Msg2');
+    updateLivePreview('end', 'preview3End');
+  </script>
+</body>
+</html>
+ // Step 5: Color and font live preview
+    function updatePreviewStyle(selectId, previewId, property, isFont = false) {
+      const select = document.getElementById(selectId);
+      const preview = document.getElementById(previewId);
+      if (!select || !preview) return;
+      select.addEventListener('change', () => {
+        const value = select.value;
+        if (isFont) {
+          preview.style.fontFamily = `'${value}', sans-serif`;
+        } else {
+          preview.style[property] = value;
+        }
+      });
+    }
+
+    updatePreviewStyle('outline', 'previewBackground', 'backgroundColor');
+    updatePreviewStyle('font', 'previewText', 'fontFamily', true);
+  </script>
+</body>
+</html>
+<!-- Reveal Preview Panel -->
+<div class="bg-white rounded-xl shadow-md p-6">
+  <h2 class="text-xl font-semibold mb-4 text-gray-700">Live Preview</h2>
+  <div id="previewBackground" class="p-8 rounded-lg" style="background-color: #fff7ed;">
+    <div id="previewText" class="text-center space-y-4">
+      <p id="preview2MainText" class="text-2xl font-bold tracking-wide"></p>
+      <p id="preview3Msg1" class="text-lg"></p>
+      <p id="preview3Msg2" class="text-lg"></p>
+      <p id="preview3End" class="text-base italic"></p>
+    </div>
+  </div>
+</div>
+<!-- Step 7: Color and Font Options -->
+<div class="grid md:grid-cols-2 gap-6">
+  <div>
+    <label for="outline" class="block font-semibold mb-1 text-gray-700">Background Color</label>
+    <select id="outline" name="outline" class="w-full p-3 rounded-lg border border-gray-300">
+      <option value="#fff7ed">Cream</option>
+      <option value="#e0f7fa">Light Blue</option>
+      <option value="#fce4ec">Light Pink</option>
+      <option value="#e8f5e9">Light Green</option>
+      <option value="#f3e5f5">Lavender</option>
+    </select>
+  </div>
+  <div>
+    <label for="font" class="block font-semibold mb-1 text-gray-700">Font</label>
+    <select id="font" name="font" class="w-full p-3 rounded-lg border border-gray-300">
+      <option value="Poppins">Poppins</option>
+      <option value="Playfair Display">Playfair Display</option>
+      <option value="Dancing Script">Dancing Script</option>
+      <option value="Montserrat">Montserrat</option>
+      <option value="Great Vibes">Great Vibes</option>
+      <option value="Roboto">Roboto</option>
+      <option value="Lora">Lora</option>
+      <option value="Pacifico">Pacifico</option>
+      <option value="Crimson Text">Crimson Text</option>
+      <option value="Sacramento">Sacramento</option>
+    </select>
+  </div>
+</div>
+
+<!-- Reveal Preview Panel -->
+<div class="bg-white rounded-xl shadow-md p-6 mt-6">
+  <h2 class="text-xl font-semibold mb-4 text-gray-700">Live Preview</h2>
+  <div id="previewBackground" class="p-8 rounded-lg" style="background-color: #fff7ed;">
+    <div id="previewText" class="text-center space-y-4">
+      <p id="preview2MainText" class="text-2xl font-bold tracking-wide"></p>
+      <p id="preview3Msg1" class="text-lg"></p>
+      <p id="preview3Msg2" class="text-lg"></p>
+      <p id="preview3End" class="text-base italic"></p>
+    </div>
+  </div>
+</div>
+<!-- Section 1: Baby Info -->
+<div class="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+  <h2 class="text-xl font-semibold text-gray-700 mb-2">Section 1: Baby Details</h2>
+
+  <div>
+    <label for="name" class="block font-medium text-gray-700">Baby's Name (or Nickname)</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. Baby Luna"
+    />
+  </div>
+
+  <div>
+    <label for="due" class="block font-medium text-gray-700">Due Month or Season</label>
+    <input
+      type="text"
+      id="due"
+      name="due"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. September, Winter, Spring 2026"
+    />
+  </div>
+
+  <div>
+    <label for="parents" class="block font-medium text-gray-700">Parents' Names</label>
+    <input
+      type="text"
+      id="parents"
+      name="parents"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. Ashley & Jamie"
+    />
+  </div>
+</div>
+  <!-- Section 2: Main Announcement -->
+      <div class="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Section 2: Main Announcement Line</h2>
+
+        <div>
+          <label for="mainline" class="block font-medium text-gray-700">Main Reveal Line</label>
+          <input
+            type="text"
+            id="mainline"
+            name="mainline"
+            class="w-full p-3 border border-gray-300 rounded-lg"
+            placeholder="e.g. It's a girl!"
+          />
+        </div>
+      </div>
+
+    </form>
+    <div id="urlResult" class="hidden"></div>
+  </div>
+
+  <script>
+    // JavaScript remains unchanged
+  </script>
+</body>
+</html>
+<!-- Section 3: Message Before Baby Name -->
+<div class="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+  <h2 class="text-xl font-semibold text-gray-700 mb-2">Section 3: Message Before Baby Name</h2>
+
+  <div>
+    <label for="msg1" class="block font-medium text-gray-700">Line Before Baby Name</label>
+    <input
+      type="text"
+      id="msg1"
+      name="msg1"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. We can't wait to meet..."
+    />
+  </div>
+</div>
+<!-- Section 4: Message After Baby Name -->
+<div class="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+  <h2 class="text-xl font-semibold text-gray-700 mb-2">Section 4: Message After Baby Name</h2>
+
+  <div>
+    <label for="msg2" class="block font-medium text-gray-700">Line After Baby Name</label>
+    <input
+      type="text"
+      id="msg2"
+      name="msg2"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. Arriving this winter"
+    />
+  </div>
+</div>
+<!-- Section 5: Ending Message -->
+<div class="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+  <h2 class="text-xl font-semibold text-gray-700 mb-2">Section 5: Ending Message (Optional)</h2>
+
+  <div>
+    <label for="endmsg" class="block font-medium text-gray-700">Closing Line</label>
+    <input
+      type="text"
+      id="endmsg"
+      name="endmsg"
+      class="w-full p-3 border border-gray-300 rounded-lg"
+      placeholder="e.g. With love, The Smith Family"
+    />
+  </div>
+</div>
+<script>
+  const previewBackground = document.getElementById('previewBackground');
+  const preview2MainText = document.getElementById('preview2MainText');
+  const preview3Msg1 = document.getElementById('preview3Msg1');
+  const preview3Msg2 = document.getElementById('preview3Msg2');
+  const preview3End = document.getElementById('preview3End');
+
+  document.getElementById('outline').addEventListener('change', function () {
+    previewBackground.style.backgroundColor = this.value;
+  });
+
+  document.getElementById('font').addEventListener('change', function () {
+    previewBackground.style.fontFamily = this.value;
+  });
+
+  document.getElementById('mainline').addEventListener('input', function () {
+    preview2MainText.textContent = this.value;
+  });
+
+  document.getElementById('name').addEventListener('input', function () {
+    updateMsg1();
+  });
+
+  document.getElementById('due').addEventListener('input', function () {
+    updateMsg1();
+  });
+
+  document.getElementById('parents').addEventListener('input', function () {
+    updateMsg2();
+  });
+
+  document.getElementById('endmsg').addEventListener('input', function () {
+    preview3End.textContent = this.value;
+  });
+
+  function updateMsg1() {
+    const name = document.getElementById('name').value;
+    const due = document.getElementById('due').value;
+    preview3Msg1.textContent = `Expected arrival: ${name ? name + ' – ' : ''}${due}`;
+  }
+
+  function updateMsg2() {
+    const parents = document.getElementById('parents').value;
+    preview3Msg2.textContent = parents ? `Proud parents: ${parents}` : '';
+  }
+
+  // Trigger updates on page load if values are pre-filled
+  updateMsg1();
+  updateMsg2();
+</script>
+<div class="text-center">
+  <button
+    type="submit"
+    class="bg-[#cadcca] hover:bg-[#a8d0b5] text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all"
+  >
+    Generate Shareable Link
+  </button>
+</div>
+<div id="urlResult" class="hidden mt-8 bg-white p-6 rounded-xl shadow-lg text-center">
+  <h3 class="text-lg font-semibold text-gray-700 mb-2">Your Shareable Link:</h3>
+  <p id="generatedUrl" class="text-blue-600 break-words underline cursor-pointer"></p>
+</div>
+document.getElementById('revealForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const params = new URLSearchParams({
+    name: document.getElementById('name').value,
+    due: document.getElementById('due').value,
+    parents: document.getElementById('parents').value,
+    mainline: document.getElementById('mainline').value,
+    msg1: document.getElementById('msg1')?.value || '',
+    msg2: document.getElementById('msg2')?.value || '',
+    endmsg: document.getElementById('endmsg')?.value || '',
+    font: document.getElementById('font').value,
+    outline: document.getElementById('outline').value
+  });
+
+  const baseUrl = window.location.origin + window.location.pathname;
+  const fullUrl = `${baseUrl}?${params.toString()}`;
+
+  document.getElementById('generatedUrl').textContent = fullUrl;
+  document.getElementById('generatedUrl').onclick = () => {
+    navigator.clipboard.writeText(fullUrl);
+    alert('Link copied to clipboard!');
+  };
+
+  document.getElementById('urlResult').classList.remove('hidden');
+});
+window.addEventListener('DOMContentLoaded', function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const fields = ['name', 'due', 'parents', 'mainline', 'msg1', 'msg2', 'endmsg', 'font', 'outline'];
+  fields.forEach(id => {
+    if (params.has(id)) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.value = params.get(id);
+        el.dispatchEvent(new Event('input')); // trigger preview update
+        if (id === 'outline') el.dispatchEvent(new Event('change'));
+        if (id === 'font') el.dispatchEvent(new Event('change'));
+      }
+    }
+  });
+
+  // Show preview area if link is loaded directly with data
+  const hasPreviewData = fields.some(id => params.has(id));
+  if (hasPreviewData) {
+    document.getElementById('passwordScreen').style.display = 'none';
+    document.getElementById('mainApp').classList.remove('hidden');
+    sessionStorage.setItem('templateAccess', 'granted');
+  }
+});
+<!-- Update your font dropdown options like this: -->
+<select id="font" name="font" class="w-full p-3 rounded-lg border border-gray-300" style="font-family: Poppins;">
+  <option value="Poppins" style="font-family: Poppins;">Poppins</option>
+  <option value="Playfair Display" style="font-family: 'Playfair Display';">Playfair Display</option>
+  <option value="Dancing Script" style="font-family: 'Dancing Script';">Dancing Script</option>
+  <!-- ... and so on -->
+</select>
+document.getElementById('font').addEventListener('change', function () {
+  this.style.fontFamily = this.value;
+});
+<div class="space-y-6">
+  <!-- All form sections go here -->
+</div>
+<div class="px-4 sm:px-6 lg:px-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<button
+  id="downloadBtn"
+  class="mt-4 bg-pink-200 hover:bg-pink-300 text-gray-800 font-medium py-2 px-4 rounded"
+>
+  Download Preview as Image
+</button>
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  html2canvas(document.getElementById('previewBackground')).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'reveal-preview.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+});
+
+// Auto-save on input
+document.querySelectorAll('#revealForm input, #revealForm select').forEach(el => {
+  el.addEventListener('input', () => {
+    localStorage.setItem(el.id, el.value);
+  });
+});
+
+// Load from localStorage on page load
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#revealForm input, #revealForm select').forEach(el => {
+    const saved = localStorage.getItem(el.id);
+    if (saved) {
+      el.value = saved;
+      el.dispatchEvent(new Event('input'));
+    }
+  });
+});
+
