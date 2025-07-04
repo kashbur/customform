@@ -613,6 +613,7 @@
     if (elements[key]) elements[key].addEventListener('input', updatePreview);
   });
 </script>
+<script>
  // Step 2: Form submission logic
     document.getElementById('revealForm').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -636,6 +637,7 @@
   </script>
 </body>
 </html>
+<script>
 // Step 3: Copy to clipboard logic
     document.getElementById('copyBtn')?.addEventListener('click', function () {
       const urlInput = document.getElementById('generatedUrl');
@@ -657,6 +659,7 @@
 </body>
 </html>
 
+<script>
   // Step 4: Live preview logic
     function updateLivePreview(id, targetId, transformFn = val => val.toUpperCase()) {
       const input = document.getElementById(id);
@@ -676,6 +679,7 @@
   </script>
 </body>
 </html>
+<script>
  // Step 5: Color and font live preview
     function updatePreviewStyle(selectId, previewId, property, isFont = false) {
       const select = document.getElementById(selectId);
