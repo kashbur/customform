@@ -231,47 +231,163 @@
   if(sessionStorage.getItem('access')==='granted'){screen.classList.add('hidden');app.classList.remove('hidden');}
   form.addEventListener('submit',e=>{e.preventDefault();if(accepted.includes(document.getElementById('passwordInput').value.trim())){sessionStorage.setItem('access','granted');screen.classList.add('hidden');app.classList.remove('hidden');}else{error.classList.remove('hidden');}});
 })();
-const debounce=(fn,delay=100)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);}};
-const els={backgroundTheme:document.getElementById('backgroundTheme'),backgroundPicker:document.getElementById('backgroundPicker'),backgroundHex:document.getElementById('backgroundHex'),textColor:document.getElementById('textColor'),textPicker:document.getElementById('textPicker'),textHex:document.getElementById('textHex'),outlineColor:document.getElementById('outlineColor'),outlinePicker:document.getElementById('outlinePicker'),outlineHex:document.getElementById('outlineHex'),fontFamily:document.getElementById('fontFamily'),mainHeadline:document.getElementById('mainHeadline'),message1:document.getElementById('message1'),message2:document.getElementById('message2'),photo:document.getElementById('photo'),ending:document.getElementById('ending'),previewBackground:document.getElementById('previewBackground'),previewMain:document.getElementById('previewMain'),previewSub:document.getElementById('previewSub'),preview1Background:document.getElementById('preview1Background'),preview1Text:document.getElementById('preview1Text'),preview2Background:document.getElementById('preview2Background'),preview2Msg1:document.getElementById('preview2Msg1'),preview2Msg2:document.getElementById('preview2Msg2'),preview2Photo:document.getElementById('preview2Photo'),preview2Ending:document.getElementById('preview2Ending')};
-const themes={beige:'#f3f3f3',pink:'#fccac5',blue:'#add4fd',yellow:'#fef3c7',green:'#81a969',purple:'#d2c5fc',gold:'#ffdf9a',white:'#ffffff'};
-function applyText(el,color,outline,font){if(!el)return;el.style.color=color;el.style.fontFamily=`'${font}',sans-serif`;if(outline==='transparent'){el.style.textShadow='none';el.style.webkitTextStroke='0';}else{el.style.textShadow=`-1px -1px 0 ${outline},1px -1px 0 ${outline},-1px 1px 0 ${outline},1px 1px 0 ${outline}`;el.style.webkitTextStroke=`1px ${outline}`;}}
-function getColor(selectEl,pickerEl,hexEl,def){const val=selectEl.value;return val==='custom'?(hexEl.value||def):(val in themes?themes[val]:val||def);}
-const update=debounce(()=>{
-  const bg=getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,'#f3f3f3');
-  const text=getColor(els.textColor,els.textPicker,els.textHex,'#000000');
-  const outline=getColor(els.outlineColor,els.outlinePicker,els.outlineHex,'transparent');
-  const font=els.fontFamily.value;
-  els.previewBackground.style.backgroundColor=bg;
-  els.preview1Background.style.backgroundColor=bg;
-  els.preview2Background.style.backgroundColor=bg;
-  applyText(els.previewMain,text,outline,font);
-  applyText(els.previewSub,text,outline,font);
-  applyText(els.preview1Text,text,outline,font);
-  applyText(els.preview2Msg1,text,outline,font);
-  applyText(els.preview2Msg2,text,outline,font);
-  applyText(els.preview2Ending,text,outline,font);
-  const main=els.mainHeadline.value.trim().toUpperCase();
-  els.previewMain.textContent=main||'Your Text Here';
-  els.preview1Text.textContent=main;els.preview1Text.style.display=main?'block':'none';
-  const msg1=els.message1.value.trim().toUpperCase();
-  els.previewSub.textContent=msg1||'This will be the style for the reveal';
-  els.preview2Msg1.textContent=msg1;els.preview2Msg1.style.display=msg1?'block':'none';
-  const msg2=els.message2.value.trim();
-  els.preview2Msg2.textContent=msg2;els.preview2Msg2.style.display=msg2?'block':'none';
-  const img=els.photo.value.trim();
-  if(img){els.preview2Photo.innerHTML=`<img src="${img}" class="max-h-40 mx-auto rounded-lg">`;els.preview2Photo.style.display='block';}else{els.preview2Photo.innerHTML='';els.preview2Photo.style.display='none';}
-  const end=els.ending.value.trim();
-  els.preview2Ending.textContent=end;els.preview2Ending.style.display=end?'block':'none';
-},100);
-['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','mainHeadline','message1','message2','photo','ending'].forEach(id=>{document.getElementById(id).addEventListener('input',update);document.getElementById(id).addEventListener('change',update);});
-['backgroundTheme','textColor','outlineColor'].forEach(id=>{document.getElementById(id).addEventListener('change',e=>{document.getElementById(id+'Custom').classList.toggle('hidden',e.target.value!=='custom');});});
-[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex']].forEach(([pickerId,hexId])=>{
-  const picker=document.getElementById(pickerId);
-  const hex=document.getElementById(hexId);
-  picker.addEventListener('input',()=>{hex.value=picker.value;});
-  hex.addEventListener('input',()=>{if(/^#([0-9A-Fa-f]{6})$/.test(hex.value))picker.value=hex.value;});
+const els={
+  backgroundTheme:document.getElementById('backgroundTheme'),
+  backgroundPicker:document.getElementById('backgroundPicker'),
+  backgroundHex:document.getElementById('backgroundHex'),
+  textColor:document.getElementById('textColor'),
+  textPicker:document.getElementById('textPicker'),
+  textHex:document.getElementById('textHex'),
+  outlineColor:document.getElementById('outlineColor'),
+  outlinePicker:document.getElementById('outlinePicker'),
+  outlineHex:document.getElementById('outlineHex'),
+  fontFamily:document.getElementById('fontFamily'),
+  mainHeadline:document.getElementById('mainHeadline'),
+  message1:document.getElementById('message1'),
+  message2:document.getElementById('message2'),
+  photo:document.getElementById('photo'),
+  ending:document.getElementById('ending'),
+  previewBackground:document.getElementById('previewBackground'),
+  previewMain:document.getElementById('previewMain'),
+  previewSub:document.getElementById('previewSub'),
+  preview1Background:document.getElementById('preview1Background'),
+  preview1Text:document.getElementById('preview1Text'),
+  preview2Background:document.getElementById('preview2Background'),
+  preview2Msg1:document.getElementById('preview2Msg1'),
+  preview2Msg2:document.getElementById('preview2Msg2'),
+  preview2Photo:document.getElementById('preview2Photo'),
+  preview2Ending:document.getElementById('preview2Ending')
+};
+
+const backgroundThemes={
+  beige:'#f3ddbb',
+  pink:'#fcc0c5',
+  blue:'#add4fd',
+  yellow:'#fef3c7',
+  green:'#81a969',
+  purple:'#d2c5fc',
+  gold:'#ffdf9a',
+  white:'#ffffff'
+};
+
+const hexColorRegex=/^#([0-9A-Fa-f]{6})$/;
+
+function toggleCustomColor(selectEl,customEl,val){
+  customEl.classList.toggle('hidden',val!=='custom');
+}
+
+function syncColorInputs(picker,hex,val){
+  if(picker&&hex){
+    if(picker===document.activeElement){
+      hex.value=val;
+    }else if(hexColorRegex.test(val)){
+      picker.value=val;
+    }
+  }
+}
+
+function applyTextStyles(el,color,outline,font){
+  if(!el) return;
+  el.style.color=color;
+  el.style.fontFamily=`'${font}', sans-serif`;
+  if(outline==='transparent'){
+    el.style.textShadow='none';
+    el.style.webkitTextStroke='0';
+  }else{
+    el.style.textShadow=`-1px -1px 0 ${outline}, 1px -1px 0 ${outline}, -1px 1px 0 ${outline}, 1px 1px 0 ${outline}`;
+    el.style.webkitTextStroke=`1px ${outline}`;
+  }
+}
+
+function getColorValue(selectEl,hexEl,def){
+  const val=selectEl.value;
+  if(val==='custom'){
+    return hexEl.value?.trim()||def;
+  }
+  return val===''?def:(backgroundThemes[val]||val);
+}
+
+let updateTimeout;
+function updatePreview(){
+  clearTimeout(updateTimeout);
+  updateTimeout=setTimeout(()=>{
+    const bg=getColorValue(els.backgroundTheme,els.backgroundHex,'#f3ddbb');
+    const text=getColorValue(els.textColor,els.textHex,'#000000');
+    const outline=getColorValue(els.outlineColor,els.outlineHex,'transparent');
+    const font=els.fontFamily.value;
+
+    els.previewBackground.style.backgroundColor=bg;
+    els.preview1Background.style.backgroundColor=bg;
+    els.preview2Background.style.backgroundColor=bg;
+
+    applyTextStyles(els.previewMain,text,outline,font);
+    applyTextStyles(els.previewSub,text,outline,font);
+    applyTextStyles(els.preview1Text,text,outline,font);
+    applyTextStyles(els.preview2Msg1,text,outline,font);
+    applyTextStyles(els.preview2Msg2,text,outline,font);
+    applyTextStyles(els.preview2Ending,text,outline,font);
+
+    const main=els.mainHeadline.value.trim().toUpperCase();
+    els.previewMain.textContent=main||'Your Text Here';
+    els.preview1Text.textContent=main;
+    els.preview1Text.style.display=main?'block':'none';
+
+    const msg1=els.message1.value.trim().toUpperCase();
+    els.previewSub.textContent=msg1||'This will be the style for the reveal';
+    els.preview2Msg1.textContent=msg1;
+    els.preview2Msg1.style.display=msg1?'block':'none';
+
+    const msg2=els.message2.value.trim();
+    els.preview2Msg2.textContent=msg2;
+    els.preview2Msg2.style.display=msg2?'block':'none';
+
+    const img=els.photo.value.trim();
+    if(img){
+      els.preview2Photo.innerHTML=`<img src="${img}" class="max-h-40 mx-auto rounded-lg">`;
+      els.preview2Photo.style.display='block';
+    }else{
+      els.preview2Photo.innerHTML='';
+      els.preview2Photo.style.display='none';
+    }
+
+    const end=els.ending.value.trim();
+    els.preview2Ending.textContent=end;
+    els.preview2Ending.style.display=end?'block':'none';
+  },100);
+}
+
+['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','mainHeadline','message1','message2','photo','ending'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',updatePreview);
+  document.getElementById(id).addEventListener('change',updatePreview);
 });
-update();
+
+els.backgroundTheme.addEventListener('change',e=>{
+  toggleCustomColor(els.backgroundTheme,document.getElementById('backgroundCustom'),e.target.value);
+  updatePreview();
+});
+els.textColor.addEventListener('change',e=>{
+  toggleCustomColor(els.textColor,document.getElementById('textCustom'),e.target.value);
+  updatePreview();
+});
+els.outlineColor.addEventListener('change',e=>{
+  toggleCustomColor(els.outlineColor,document.getElementById('outlineColorCustom'),e.target.value);
+  updatePreview();
+});
+
+[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex']].forEach(([p,h])=>{
+  const picker=document.getElementById(p);
+  const hex=document.getElementById(h);
+  picker.addEventListener('input',e=>{
+    syncColorInputs(picker,hex,e.target.value);
+    updatePreview();
+  });
+  hex.addEventListener('input',e=>{
+    syncColorInputs(picker,hex,e.target.value);
+    updatePreview();
+  });
+});
+
+updatePreview();
 const generateBtn=document.querySelector('#revealForm button[type="submit"]');
 const defaultText=generateBtn.textContent;
 const statusEl=document.getElementById('statusMsg');
@@ -281,9 +397,9 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
   const originalText=generateBtn.textContent;
   generateBtn.textContent='Generating…';
   const params=new URLSearchParams({
-    color:getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,''),
-    textColor:getColor(els.textColor,els.textPicker,els.textHex,''),
-    outlineColor:getColor(els.outlineColor,els.outlinePicker,els.outlineHex,''),
+    color:getColorValue(els.backgroundTheme,els.backgroundHex,''),
+    textColor:getColorValue(els.textColor,els.textHex,''),
+    outlineColor:getColorValue(els.outlineColor,els.outlineHex,''),
     font:els.fontFamily.value,
     main:els.mainHeadline.value.trim(),
     sub:els.message1.value.trim(),
@@ -323,7 +439,7 @@ document.getElementById('newBtn').addEventListener('click',()=>{
   statusEl.textContent='';
   generateBtn.disabled=false;
   generateBtn.textContent=defaultText;
-  update();
+  updatePreview();
 });
 </script>
 </body>
