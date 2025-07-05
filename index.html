@@ -248,15 +248,15 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
   const originalText=generateBtn.textContent;
   generateBtn.textContent='Generating…';
   const params=new URLSearchParams({
-    c:getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,''),
-    t:getColor(els.textColor,els.textPicker,els.textHex,''),
-    o:getColor(els.outlineColor,els.outlinePicker,els.outlineHex,''),
-    f:els.fontFamily.value,
-    m:els.mainHeadline.value.trim(),
-    s:els.message1.value.trim(),
-    d:els.message2.value.trim(),
-    p:encodeURIComponent(encodeURIComponent(els.photo.value.trim())),
-    e:els.ending.value.trim()
+    color:getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,''),
+    textColor:getColor(els.textColor,els.textPicker,els.textHex,''),
+    outlineColor:getColor(els.outlineColor,els.outlinePicker,els.outlineHex,''),
+    font:els.fontFamily.value,
+    main:els.mainHeadline.value.trim(),
+    sub:els.message1.value.trim(),
+    date:els.message2.value.trim(),
+    photo:encodeURIComponent(els.photo.value.trim()),
+    from:els.ending.value.trim()
   });
   const base='https://bigreveal.joyjotstudio.store/';
   let full=`${base}?${params.toString()}`;
