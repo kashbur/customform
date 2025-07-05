@@ -510,7 +510,7 @@
   };
 
   const themeColors = {
-    beige: '#f3f3f3',
+    beige: '#eedec5',
     pink: '#fccac5',
     blue: '#add4fd',
     yellow: '#fef3c7',
@@ -539,7 +539,7 @@
     const outlineVal = elements.outlineColor.value;
     const fontVal = elements.font.value;
 
-    const bgColor = bgVal === 'custom' ? elements.backgroundColorHex.value : themeColors[bgVal] || '#f3f3f3';
+    const bgColor = bgVal === 'custom' ? elements.backgroundColorHex.value : themeColors[bgVal] || '#eedec5';
     const textColor = textVal === 'custom' ? elements.textColorHex.value : textVal || '#000000';
     const outlineColor = outlineVal === 'custom' ? elements.outlineColorHex.value : outlineVal || 'transparent';
 

@@ -116,7 +116,7 @@
       </div>
       <div class="hidden md:block mt-8">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview</h3>
-        <div id="previewBackground" class="h-40 flex items-center justify-center rounded-lg" style="background-color:#f3f3f3;">
+        <div id="previewBackground" class="h-40 flex items-center justify-center rounded-lg" style="background-color:#eedec5;">
           <div id="previewText" class="text-center">
             <h1 id="previewMain" class="text-3xl font-bold">Your Text Here</h1>
             <p id="previewSub" class="text-lg">This will be the style for the reveal</p>
@@ -139,7 +139,7 @@
         </div>
         <div class="hidden md:block">
           <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 1</h3>
-          <div id="preview1Background" class="h-32 flex items-center justify-center rounded-lg" style="background-color:#f3f3f3;">
+          <div id="preview1Background" class="h-32 flex items-center justify-center rounded-lg" style="background-color:#eedec5;">
             <h1 id="preview1Text" class="text-4xl font-bold" style="display:none"></h1>
           </div>
         </div>
@@ -192,7 +192,7 @@
       </div>
       <div class="hidden md:block mt-8">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 2</h3>
-        <div id="preview2Background" class="h-64 flex items-center justify-center rounded-lg" style="background-color:#f3f3f3;">
+        <div id="preview2Background" class="h-64 flex items-center justify-center rounded-lg" style="background-color:#eedec5;">
           <div id="preview2Text" class="text-center space-y-3">
             <h2 id="preview2Msg1" class="text-2xl font-bold" style="display:none"></h2>
             <p id="preview2Msg2" class="text-lg" style="display:none"></p>
@@ -230,7 +230,7 @@
 })();
 const debounce=(fn,delay=100)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);}};
 const els={backgroundTheme:document.getElementById('backgroundTheme'),backgroundPicker:document.getElementById('backgroundPicker'),backgroundHex:document.getElementById('backgroundHex'),textColor:document.getElementById('textColor'),textPicker:document.getElementById('textPicker'),textHex:document.getElementById('textHex'),outlineColor:document.getElementById('outlineColor'),outlinePicker:document.getElementById('outlinePicker'),outlineHex:document.getElementById('outlineHex'),fontFamily:document.getElementById('fontFamily'),mainHeadline:document.getElementById('mainHeadline'),message1:document.getElementById('message1'),message2:document.getElementById('message2'),photo:document.getElementById('photo'),ending:document.getElementById('ending'),previewBackground:document.getElementById('previewBackground'),previewMain:document.getElementById('previewMain'),previewSub:document.getElementById('previewSub'),preview1Background:document.getElementById('preview1Background'),preview1Text:document.getElementById('preview1Text'),preview2Background:document.getElementById('preview2Background'),preview2Msg1:document.getElementById('preview2Msg1'),preview2Msg2:document.getElementById('preview2Msg2'),preview2Photo:document.getElementById('preview2Photo'),preview2Ending:document.getElementById('preview2Ending')};
-const themes={beige:'#f3f3f3',pink:'#fccac5',blue:'#add4fd',yellow:'#fef3c7',green:'#81a969',purple:'#d2c5fc',gold:'#ffdf9a',white:'#ffffff'};
+const themes={beige:'#eedec5',pink:'#fccac5',blue:'#add4fd',yellow:'#fef3c7',green:'#81a969',purple:'#d2c5fc',gold:'#ffdf9a',white:'#ffffff'};
 function applyText(el,color,outline,font){if(!el)return;el.style.color=color;el.style.fontFamily=`'${font}',sans-serif`;if(outline==='transparent'){el.style.textShadow='none';el.style.webkitTextStroke='0';}else{el.style.textShadow=`-1px -1px 0 ${outline},1px -1px 0 ${outline},-1px 1px 0 ${outline},1px 1px 0 ${outline}`;el.style.webkitTextStroke=`1px ${outline}`;}}
 function getColor(selectEl,pickerEl,hexEl,def){const val=selectEl.value;return val==='custom'?(hexEl.value||def):(val in themes?themes[val]:val||def);}
 const update=debounce(()=>{
@@ -261,7 +261,8 @@ const update=debounce(()=>{
   els.preview2Ending.textContent=end;els.preview2Ending.style.display=end?'block':'none';
 },100);
 ['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','mainHeadline','message1','message2','photo','ending'].forEach(id=>{document.getElementById(id).addEventListener('input',update);document.getElementById(id).addEventListener('change',update);});
-['backgroundTheme','textColor','outlineColor'].forEach(id=>{document.getElementById(id).addEventListener('change',e=>{document.getElementById(id+'Custom').classList.toggle('hidden',e.target.value!=='custom');});});
+const customMap={backgroundTheme:'backgroundCustom',textColor:'textCustom',outlineColor:'outlineColorCustom'};
+Object.keys(customMap).forEach(id=>{document.getElementById(id).addEventListener('change',e=>{document.getElementById(customMap[id]).classList.toggle('hidden',e.target.value!=='custom');});});
 [['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex']].forEach(([pickerId,hexId])=>{
   const picker=document.getElementById(pickerId);
   const hex=document.getElementById(hexId);
