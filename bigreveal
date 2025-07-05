@@ -226,7 +226,9 @@
     </div>
   </form>
   <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
-    <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
+    <h2 id="resultHeading" class="text-2xl font-bold mb-2" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
+    <p id="resultSub" class="mb-2 text-gray-700 hidden">Your link has been shortened to hide the surprise! Share this clean link with friends and family.</p>
+    <p class="font-semibold mb-1">Your shareable link:</p>
     <div class="flex items-center mb-4">
       <input id="generatedUrl" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded text-sm" />
       <button id="copyBtn" class="ml-2 px-4 py-2 rounded" style="background-color:#c0dcca;color:#1f2937;" aria-live="polite" onmouseover="this.style.backgroundColor='#a8d0b5'" onmouseout="this.style.backgroundColor='#c0dcca'">Copy</button>
@@ -433,6 +435,15 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
     }
   }catch{}
   statusEl.textContent=shortened?'Short link created.':'Using full link.';
+  const heading=document.getElementById('resultHeading');
+  const sub=document.getElementById('resultSub');
+  if(shortened){
+    heading.textContent='Your Short Reveal URL is Ready!';
+    sub.classList.remove('hidden');
+  }else{
+    heading.textContent='Your Reveal URL is Ready!';
+    sub.classList.add('hidden');
+  }
   setTimeout(()=>{statusEl.textContent='';},3000);
   generateBtn.disabled=false;
   generateBtn.textContent=originalText;
