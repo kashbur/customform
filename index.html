@@ -288,7 +288,7 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
     main:els.mainHeadline.value.trim(),
     sub:els.message1.value.trim(),
     date:els.message2.value.trim(),
-    photo:encodeURIComponent(els.photo.value.trim()),
+    photo:els.photo.value.trim(),
     from:els.ending.value.trim()
   });
   const base='https://bigreveal.joyjotstudio.store/';
