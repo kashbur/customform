@@ -176,15 +176,17 @@
       <button type="submit" class="w-full py-3 rounded-lg font-semibold" style="background-color:#cadcca;color:#1f2937;">Generate My Reveal URL</button>
     </div>
   </form>
-  <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
-    <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
-    <div class="flex items-center mb-4">
-      <input id="generatedUrl" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded text-sm" />
-      <button id="copyBtn" class="ml-2 px-4 py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Copy</button>
+    <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
+      <h2 class="text-2xl font-bold mb-2" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
+      <div id="tinyStatus" class="text-sm text-gray-600 mb-2" aria-live="polite"></div>
+      <div class="flex items-center mb-2">
+        <input id="generatedUrl" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded text-sm" />
+        <button id="copyBtn" class="ml-2 px-4 py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Copy</button>
+      </div>
+      <div id="copyFeedback" class="text-sm text-gray-600 mb-3" aria-live="polite"></div>
+      <a id="previewLink" href="#" target="_blank" class="block text-center py-2 rounded mb-3" style="background-color:#cadcca;color:#1f2937;">Preview Page</a>
+      <button id="newBtn" class="w-full py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Create Another</button>
     </div>
-    <a id="previewLink" href="#" target="_blank" class="block text-center py-2 rounded mb-3" style="background-color:#cadcca;color:#1f2937;">Preview Page</a>
-    <button id="newBtn" class="w-full py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Create Another</button>
-  </div>
 </div>
 <script>
 (function(){
@@ -233,6 +235,8 @@ const update=debounce(()=>{
 update();
 document.getElementById('revealForm').addEventListener('submit',async e=>{
   e.preventDefault();
+  const tinyStatus=document.getElementById('tinyStatus');
+  if(tinyStatus)tinyStatus.textContent='Generating link...';
   const params=new URLSearchParams({
     c:getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,''),
     t:getColor(els.textColor,els.textPicker,els.textHex,''),
@@ -248,17 +252,38 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
   let full=`${base}?${params.toString()}`;
   try{
     const r=await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(full)}`);
-    if(r.ok){const short=await r.text();if(short.startsWith('http'))full=short;}
-  }catch{}
+    if(r.ok){
+      const short=await r.text();
+      if(short.startsWith('http')){full=short;if(tinyStatus)tinyStatus.textContent='Short link created.';}else if(tinyStatus){tinyStatus.textContent='TinyURL returned an invalid link.';}
+    }else if(tinyStatus){tinyStatus.textContent='TinyURL service error.';}
+  }catch{if(tinyStatus)tinyStatus.textContent='Unable to shorten link.';}
   document.getElementById('generatedUrl').value=full;
   document.getElementById('previewLink').href=full;
   document.getElementById('urlResult').classList.remove('hidden');
+  document.getElementById('generatedUrl').focus();
 });
 document.getElementById('copyBtn').addEventListener('click',async()=>{
   const url=document.getElementById('generatedUrl').value;
-  try{await navigator.clipboard.writeText(url);}catch{const inp=document.getElementById('generatedUrl');inp.select();document.execCommand('copy');}
+  const feedback=document.getElementById('copyFeedback');
+  try{
+    await navigator.clipboard.writeText(url);
+    if(feedback)feedback.textContent='Copied to clipboard.';
+  }catch{
+    const inp=document.getElementById('generatedUrl');
+    inp.select();
+    document.execCommand('copy');
+    if(feedback)feedback.textContent='Copied using fallback.';
+  }
 });
-document.getElementById('newBtn').addEventListener('click',()=>{document.getElementById('revealForm').reset();document.getElementById('urlResult').classList.add('hidden');update();});
+document.getElementById('newBtn').addEventListener('click',()=>{
+  document.getElementById('revealForm').reset();
+  document.getElementById('urlResult').classList.add('hidden');
+  const status=document.getElementById('tinyStatus');
+  const feedback=document.getElementById('copyFeedback');
+  if(status)status.textContent='';
+  if(feedback)feedback.textContent='';
+  update();
+});
 </script>
 </body>
 </html>
