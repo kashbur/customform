@@ -232,6 +232,12 @@ const update=debounce(()=>{
 },100);
 ['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','mainHeadline','message1','message2','photo','ending'].forEach(id=>{document.getElementById(id).addEventListener('input',update);document.getElementById(id).addEventListener('change',update);});
 ['backgroundTheme','textColor','outlineColor'].forEach(id=>{document.getElementById(id).addEventListener('change',e=>{document.getElementById(id+'Custom').classList.toggle('hidden',e.target.value!=='custom');});});
+[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex']].forEach(([pickerId,hexId])=>{
+  const picker=document.getElementById(pickerId);
+  const hex=document.getElementById(hexId);
+  picker.addEventListener('input',()=>{hex.value=picker.value;});
+  hex.addEventListener('input',()=>{if(/^#([0-9A-Fa-f]{6})$/.test(hex.value))picker.value=hex.value;});
+});
 update();
 const generateBtn=document.querySelector('#revealForm button[type="submit"]');
 const defaultText=generateBtn.textContent;
