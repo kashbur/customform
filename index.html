@@ -11,6 +11,18 @@
 <style>
   body { font-family: 'Poppins', sans-serif; }
   input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,184,141,0.2); border-color:#ffb88d; }
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    opacity: 0;
+    animation: confetti 700ms ease-out forwards;
+  }
+  @keyframes confetti {
+    from { transform: translate(0,0); opacity: 1; }
+    to { transform: translate(var(--dx), var(--dy)) rotate(720deg); opacity: 0; }
+  }
 </style>
 </head>
 <body class="min-h-screen py-8" style="background-color:#ffe4b7;">
@@ -408,6 +420,23 @@ updatePreview();
 const generateBtn=document.querySelector('#revealForm button[type="submit"]');
 const defaultText=generateBtn.textContent;
 const statusEl=document.getElementById('statusMsg');
+
+function showConfettiAt(x,y){
+  const colors=['#ffc700','#ff0000','#2ecc40','#0074D9','#B10DC9'];
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div');
+    d.className='confetti';
+    d.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+    d.style.left=x+'px';
+    d.style.top=y+'px';
+    const angle=Math.random()*2*Math.PI;
+    const dist=80+Math.random()*80;
+    d.style.setProperty('--dx',Math.cos(angle)*dist+'px');
+    d.style.setProperty('--dy',Math.sin(angle)*dist+'px');
+    document.body.appendChild(d);
+    d.addEventListener('animationend',()=>d.remove());
+  }
+}
 document.getElementById('revealForm').addEventListener('submit',async e=>{
   e.preventDefault();
   generateBtn.disabled=true;
@@ -455,6 +484,8 @@ document.getElementById('copyBtn').addEventListener('click',async()=>{
   const btn=document.getElementById('copyBtn');
   const url=document.getElementById('generatedUrl').value;
   try{await navigator.clipboard.writeText(url);}catch{const inp=document.getElementById('generatedUrl');inp.select();document.execCommand('copy');}
+  const r=btn.getBoundingClientRect();
+  showConfettiAt(r.left+r.width/2,r.top+r.height/2);
   const original=btn.textContent;
   btn.textContent='Copied!';
   setTimeout(()=>{btn.textContent=original;},1500);
