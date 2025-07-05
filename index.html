@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Big Reveal Generator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Roboto:wght@300;400;500;700&family=Lora:wght@400;500;600;700&family=Pacifico&family=Crimson+Text:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Poppins', sans-serif; }
+  input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,184,141,0.2); border-color:#ffb88d; }
+</style>
+</head>
+<body class="bg-orange-100 min-h-screen py-8">
+<!-- Password Screen -->
+<div id="passwordScreen" class="max-w-md mx-auto">
+  <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+    <h1 class="text-2xl font-bold mb-4" style="color:#1f2937;">Access Required</h1>
+    <form id="passwordForm" class="space-y-4">
+      <input id="passwordInput" type="password" placeholder="Enter code" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center font-mono text-lg tracking-wider" />
+      <button type="submit" class="w-full py-3 rounded-lg font-semibold" style="background-color:#c0dcca;color:#1f2937;">Access Template</button>
+      <div id="passwordError" class="text-red-500 text-sm hidden">Incorrect code.</div>
+    </form>
+  </div>
+</div>
+<!-- Main Application -->
+<div id="mainApp" class="max-w-6xl mx-auto px-4 hidden">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold" style="color:#1f2937;">Big Reveal Generator</h1>
+    <p class="text-gray-600">Create your personalized reveal page and get a shareable link!</p>
+  </div>
+  <form id="revealForm" class="space-y-8">
+    <!-- Section 1 -->
+    <div class="bg-white rounded-2xl shadow-xl p-8" id="section1">
+      <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Colors & Styling</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label for="backgroundTheme" class="block text-sm font-semibold text-gray-700 mb-2">Background Theme</label>
+          <select id="backgroundTheme" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3" required>
+            <option value="">Choose a theme...</option>
+            <option value="beige">Beige</option>
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+            <option value="gold">Gold</option>
+            <option value="white">White</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="backgroundCustom" class="hidden">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="backgroundPicker" class="w-12 h-12 border rounded-lg" value="#eedec5" />
+              <input type="text" id="backgroundHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#eedec5" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="textColor" class="block text-sm font-semibold text-gray-700 mb-2">Text Color</label>
+          <select id="textColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3" required>
+            <option value="">Choose a color...</option>
+            <option value="#000000">Black</option>
+            <option value="#ffffff">White</option>
+            <option value="#374151">Dark Gray</option>
+            <option value="#dc2626">Red</option>
+            <option value="#ea580c">Orange</option>
+            <option value="#ca8a04">Yellow</option>
+            <option value="#16a34a">Green</option>
+            <option value="#2563eb">Blue</option>
+            <option value="#7c3aed">Purple</option>
+            <option value="#ff69b4">Pink</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="textCustom" class="hidden">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="textPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+              <input type="text" id="textHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="outlineColor" class="block text-sm font-semibold text-gray-700 mb-2">Text Outline Color</label>
+          <select id="outlineColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg" required>
+            <option value="transparent">None</option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="outlineCustom" class="hidden mt-3">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="outlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+              <input type="text" id="outlineHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="fontFamily" class="block text-sm font-semibold text-gray-700 mb-2">Font Style</label>
+          <select id="fontFamily" class="w-full px-4 py-3 border border-gray-300 rounded-lg" required>
+            <option value="Poppins">Poppins</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Great Vibes">Great Vibes</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Lora">Lora</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Crimson Text">Crimson Text</option>
+            <option value="Sacramento">Sacramento</option>
+          </select>
+        </div>
+      </div>
+      <div class="hidden md:block mt-8">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview</h3>
+        <div id="previewBackground" class="h-40 flex items-center justify-center rounded-lg" style="background-color:#f3ddbb;">
+          <div id="previewText" class="text-center">
+            <h1 id="previewMain" class="text-3xl font-bold">Your Text Here</h1>
+            <p id="previewSub" class="text-lg">This will be the style for the reveal</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Section 2 -->
+    <div class="bg-white rounded-2xl shadow-xl p-8" id="section2">
+      <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Main Announcement</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label for="mainHeadline" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
+          <input id="mainHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="We're Expecting!" required />
+          <p class="text-xs text-gray-500 mt-1">This text will appear in ALL CAPS.</p>
+        </div>
+        <div class="hidden md:block">
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 1</h3>
+          <div id="preview1Background" class="h-32 flex items-center justify-center rounded-lg" style="background-color:#f3ddbb;">
+            <h1 id="preview1Text" class="text-4xl font-bold" style="display:none"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Section 3 -->
+    <div class="bg-white rounded-2xl shadow-xl p-8" id="section3">
+      <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Additional Details</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label for="message1" class="block text-sm font-semibold text-gray-700 mb-2">Message 1</label>
+          <input id="message1" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Baby Johnson" required />
+        </div>
+        <div>
+          <label for="message2" class="block text-sm font-semibold text-gray-700 mb-2">Message 2 (optional)</label>
+          <input id="message2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Coming soon!" />
+        </div>
+        <div class="md:col-span-2">
+          <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">Photo URL (optional)</label>
+          <input id="photo" type="url" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="https://i.imgur.com/example.jpg" />
+        </div>
+        <div class="md:col-span-2">
+          <label for="ending" class="block text-sm font-semibold text-gray-700 mb-2">Ending Message (optional)</label>
+          <input id="ending" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Love, The Johnsons" />
+        </div>
+      </div>
+      <div class="hidden md:block mt-8">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 2</h3>
+        <div id="preview2Background" class="h-64 flex items-center justify-center rounded-lg" style="background-color:#f3ddbb;">
+          <div id="preview2Text" class="text-center space-y-3">
+            <h2 id="preview2Msg1" class="text-2xl font-bold" style="display:none"></h2>
+            <p id="preview2Msg2" class="text-lg" style="display:none"></p>
+            <div id="preview2Photo" style="display:none"></div>
+            <p id="preview2Ending" class="italic" style="display:none"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Generate URL -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+      <button type="submit" class="w-full py-3 rounded-lg font-semibold" style="background-color:#cadcca;color:#1f2937;">Generate My Reveal URL</button>
+    </div>
+  </form>
+  <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
+    <h2 class="text-2xl font-bold mb-4" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
+    <div class="flex items-center mb-4">
+      <input id="generatedUrl" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded text-sm" />
+      <button id="copyBtn" class="ml-2 px-4 py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Copy</button>
+    </div>
+    <a id="previewLink" href="#" target="_blank" class="block text-center py-2 rounded mb-3" style="background-color:#cadcca;color:#1f2937;">Preview Page</a>
+    <button id="newBtn" class="w-full py-2 rounded" style="background-color:#cadcca;color:#1f2937;">Create Another</button>
+  </div>
+</div>
+<script>
+(function(){
+  const accepted=['08260','Gke0907!'];
+  const form=document.getElementById('passwordForm');
+  const screen=document.getElementById('passwordScreen');
+  const app=document.getElementById('mainApp');
+  const error=document.getElementById('passwordError');
+  if(sessionStorage.getItem('access')==='granted'){screen.classList.add('hidden');app.classList.remove('hidden');}
+  form.addEventListener('submit',e=>{e.preventDefault();if(accepted.includes(document.getElementById('passwordInput').value.trim())){sessionStorage.setItem('access','granted');screen.classList.add('hidden');app.classList.remove('hidden');}else{error.classList.remove('hidden');}});
+})();
+const debounce=(fn,delay=100)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),delay);}};
+const els={backgroundTheme:document.getElementById('backgroundTheme'),backgroundPicker:document.getElementById('backgroundPicker'),backgroundHex:document.getElementById('backgroundHex'),textColor:document.getElementById('textColor'),textPicker:document.getElementById('textPicker'),textHex:document.getElementById('textHex'),outlineColor:document.getElementById('outlineColor'),outlinePicker:document.getElementById('outlinePicker'),outlineHex:document.getElementById('outlineHex'),fontFamily:document.getElementById('fontFamily'),mainHeadline:document.getElementById('mainHeadline'),message1:document.getElementById('message1'),message2:document.getElementById('message2'),photo:document.getElementById('photo'),ending:document.getElementById('ending'),previewBackground:document.getElementById('previewBackground'),previewMain:document.getElementById('previewMain'),previewSub:document.getElementById('previewSub'),preview1Background:document.getElementById('preview1Background'),preview1Text:document.getElementById('preview1Text'),preview2Background:document.getElementById('preview2Background'),preview2Msg1:document.getElementById('preview2Msg1'),preview2Msg2:document.getElementById('preview2Msg2'),preview2Photo:document.getElementById('preview2Photo'),preview2Ending:document.getElementById('preview2Ending')};
+const themes={beige:'#f3ddbb',pink:'#fccac5',blue:'#add4fd',yellow:'#fef3c7',green:'#81a969',purple:'#d2c5fc',gold:'#ffdf9a',white:'#ffffff'};
+function applyText(el,color,outline,font){if(!el)return;el.style.color=color;el.style.fontFamily=`'${font}',sans-serif`;if(outline==='transparent'){el.style.textShadow='none';el.style.webkitTextStroke='0';}else{el.style.textShadow=`-1px -1px 0 ${outline},1px -1px 0 ${outline},-1px 1px 0 ${outline},1px 1px 0 ${outline}`;el.style.webkitTextStroke=`1px ${outline}`;}}
+function getColor(selectEl,pickerEl,hexEl,def){const val=selectEl.value;return val==='custom'?(hexEl.value||def):(val in themes?themes[val]:val||def);}
+const update=debounce(()=>{
+  const bg=getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,'#f3ddbb');
+  const text=getColor(els.textColor,els.textPicker,els.textHex,'#000000');
+  const outline=getColor(els.outlineColor,els.outlinePicker,els.outlineHex,'transparent');
+  const font=els.fontFamily.value;
+  els.previewBackground.style.backgroundColor=bg;
+  els.preview1Background.style.backgroundColor=bg;
+  els.preview2Background.style.backgroundColor=bg;
+  applyText(els.previewMain,text,outline,font);
+  applyText(els.previewSub,text,outline,font);
+  applyText(els.preview1Text,text,outline,font);
+  applyText(els.preview2Msg1,text,outline,font);
+  applyText(els.preview2Msg2,text,outline,font);
+  applyText(els.preview2Ending,text,outline,font);
+  const main=els.mainHeadline.value.trim().toUpperCase();
+  els.previewMain.textContent=main||'Your Text Here';
+  els.preview1Text.textContent=main;els.preview1Text.style.display=main?'block':'none';
+  const msg1=els.message1.value.trim().toUpperCase();
+  els.previewSub.textContent=msg1||'This will be the style for the reveal';
+  els.preview2Msg1.textContent=msg1;els.preview2Msg1.style.display=msg1?'block':'none';
+  const msg2=els.message2.value.trim();
+  els.preview2Msg2.textContent=msg2;els.preview2Msg2.style.display=msg2?'block':'none';
+  const img=els.photo.value.trim();
+  if(img){els.preview2Photo.innerHTML=`<img src="${img}" class="max-h-40 mx-auto rounded-lg">`;els.preview2Photo.style.display='block';}else{els.preview2Photo.innerHTML='';els.preview2Photo.style.display='none';}
+  const end=els.ending.value.trim();
+  els.preview2Ending.textContent=end;els.preview2Ending.style.display=end?'block':'none';
+},100);
+['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','mainHeadline','message1','message2','photo','ending'].forEach(id=>{document.getElementById(id).addEventListener('input',update);document.getElementById(id).addEventListener('change',update);});
+['backgroundTheme','textColor','outlineColor'].forEach(id=>{document.getElementById(id).addEventListener('change',e=>{document.getElementById(id+'Custom').classList.toggle('hidden',e.target.value!=='custom');});});
+update();
+document.getElementById('revealForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const params=new URLSearchParams({
+    c:getColor(els.backgroundTheme,els.backgroundPicker,els.backgroundHex,''),
+    t:getColor(els.textColor,els.textPicker,els.textHex,''),
+    o:getColor(els.outlineColor,els.outlinePicker,els.outlineHex,''),
+    f:els.fontFamily.value,
+    m:els.mainHeadline.value.trim(),
+    s:els.message1.value.trim(),
+    d:els.message2.value.trim(),
+    p:encodeURIComponent(els.photo.value.trim()),
+    e:els.ending.value.trim()
+  });
+  const base='https://bigreveal.joyjotstudio.store/';
+  let full=`${base}?${params.toString()}`;
+  try{
+    const r=await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(full)}`);
+    if(r.ok){const short=await r.text();if(short.startsWith('http'))full=short;}
+  }catch{}
+  document.getElementById('generatedUrl').value=full;
+  document.getElementById('previewLink').href=full;
+  document.getElementById('urlResult').classList.remove('hidden');
+});
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const url=document.getElementById('generatedUrl').value;
+  try{await navigator.clipboard.writeText(url);}catch{const inp=document.getElementById('generatedUrl');inp.select();document.execCommand('copy');}
+});
+document.getElementById('newBtn').addEventListener('click',()=>{document.getElementById('revealForm').reset();document.getElementById('urlResult').classList.add('hidden');update();});
+</script>
+</body>
+</html>
