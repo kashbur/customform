@@ -296,7 +296,7 @@
         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
       >
       <p class="text-xs text-gray-500 mt-1">This is the main message that will appear on your reveal page.</p>
-      <p class="text-xs font-medium mt-1 text-[#cadcca]">Note: This text will appear in ALL CAPS on your reveal page.</p>
+      <p class="text-xs font-medium mt-1 text-[#c0dcca]">Note: This text will appear in ALL CAPS on your reveal page.</p>
     </div>
 
     <!-- Live Preview: Page 1 -->
@@ -412,9 +412,9 @@
     type="submit"
     form="revealForm"
     class="w-full font-semibold py-4 px-6 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-    style="background-color: #cadcca; color: #1f2937;"
+    style="background-color: #c0dcca; color: #1f2937;"
     onmouseover="this.style.backgroundColor='#a8d0b5'"
-    onmouseout="this.style.backgroundColor='#cadcca'"
+    onmouseout="this.style.backgroundColor='#c0dcca'"
   >
     Generate My Reveal URL
   </button>
@@ -436,9 +436,9 @@
         id="copyBtn"
         type="button"
         class="px-4 py-2 rounded transition-colors text-sm font-medium"
-        style="background-color: #cadcca; color: #1f2937;"
+        style="background-color: #c0dcca; color: #1f2937;"
         onmouseover="this.style.backgroundColor='#a8d0b5'"
-        onmouseout="this.style.backgroundColor='#cadcca'"
+        onmouseout="this.style.backgroundColor='#c0dcca'"
       >
         Copy
       </button>
@@ -451,9 +451,9 @@
       href="#"
       target="_blank"
       class="flex-1 text-center py-3 px-4 rounded-lg transition-colors font-medium"
-      style="background-color: #cadcca; color: #1f2937;"
+      style="background-color: #c0dcca; color: #1f2937;"
       onmouseover="this.style.backgroundColor='#a8d0b5'"
-      onmouseout="this.style.backgroundColor='#cadcca'"
+      onmouseout="this.style.backgroundColor='#c0dcca'"
     >
       Preview Page
     </a>
@@ -461,9 +461,9 @@
       id="newRevealBtn"
       type="button"
       class="flex-1 py-3 px-4 rounded-lg transition-colors font-medium"
-      style="background-color: #cadcca; color: #1f2937;"
+      style="background-color: #c0dcca; color: #1f2937;"
       onmouseover="this.style.backgroundColor='#a8d0b5'"
-      onmouseout="this.style.backgroundColor='#cadcca'"
+      onmouseout="this.style.backgroundColor='#c0dcca'"
     >
       Create Another
     </button>
@@ -510,7 +510,7 @@
   };
 
   const themeColors = {
-    beige: '#f3ddbb',
+    beige: '#f3f3f3',
     pink: '#fccac5',
     blue: '#add4fd',
     yellow: '#fef3c7',
@@ -539,7 +539,7 @@
     const outlineVal = elements.outlineColor.value;
     const fontVal = elements.font.value;
 
-    const bgColor = bgVal === 'custom' ? elements.backgroundColorHex.value : themeColors[bgVal] || '#f3ddbb';
+    const bgColor = bgVal === 'custom' ? elements.backgroundColorHex.value : themeColors[bgVal] || '#f3f3f3';
     const textColor = textVal === 'custom' ? elements.textColorHex.value : textVal || '#000000';
     const outlineColor = outlineVal === 'custom' ? elements.outlineColorHex.value : outlineVal || 'transparent';
 
@@ -913,7 +913,7 @@
 <div class="text-center">
   <button
     type="submit"
-    class="bg-[#cadcca] hover:bg-[#a8d0b5] text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all"
+    class="bg-[#c0dcca] hover:bg-[#a8d0b5] text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all"
   >
     Generate Shareable Link
   </button>
