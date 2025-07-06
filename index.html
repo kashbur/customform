@@ -662,51 +662,6 @@ function updatePreview(){
   'mainItalic',
   'mainCaps',
   'subTextColor',
-  'subOutlineColor',
-  'subBold',
-  'subItalic',
-  'subCaps',
-  'dateTextColor',
-  'dateOutlineColor',
-  'dateBold',
-  'dateItalic',
-  'dateCaps',
-  'fromTextColor',
-  'fromOutlineColor',
-  'fromBold',
-  'fromItalic',
-  'fromCaps',
-  'mainHeadline',
-  'message1',
-  'message2',
-  'photo',
-  'ending'
-].forEach(id => {
-  document.getElementById(id).addEventListener('input', updatePreview);
-  document.getElementById(id).addEventListener('change', updatePreview);
-});
-
-[
-  'backgroundTheme',
-  'backgroundPicker',
-  'backgroundHex',
-  'textColor',
-  'textPicker',
-  'textHex',
-  'outlineColor',
-  'outlinePicker',
-  'outlineHex',
-  'fontFamily',
-  'fontMain',
-  'fontSub',
-  'fontDate',
-  'fontFrom',
-  'mainTextColor',
-  'mainOutlineColor',
-  'mainBold',
-  'mainItalic',
-  'mainCaps',
-  'subTextColor',
   'subTextPicker',
   'subTextHex',
   'subOutlineColor',
@@ -739,12 +694,11 @@ function updatePreview(){
   'photo',
   'ending'
 ].forEach(id => {
-  document.getElementById(id).addEventListener('input', updatePreview);
-  document.getElementById(id).addEventListener('change', updatePreview);
-});
-
-  document.getElementById(id).addEventListener('input',updatePreview);
-  document.getElementById(id).addEventListener('change',updatePreview);
+  const el=document.getElementById(id);
+  if(el){
+    el.addEventListener('input', updatePreview);
+    el.addEventListener('change', updatePreview);
+  }
 });
 
 els.backgroundTheme.addEventListener('change',e=>{
@@ -792,7 +746,6 @@ els.fromOutlineColor.addEventListener('change', e => {
   ['backgroundPicker','backgroundHex'],
   ['textPicker','textHex'],
   ['outlinePicker','outlineHex'],
-[
   ['mainTextPicker','mainTextHex'],
   ['subTextPicker','subTextHex'],
   ['subOutlinePicker','subOutlineHex'],
@@ -800,19 +753,7 @@ els.fromOutlineColor.addEventListener('change', e => {
   ['dateOutlinePicker','dateOutlineHex'],
   ['fromTextPicker','fromTextHex'],
   ['fromOutlinePicker','fromOutlineHex']
-].forEach(([p, h]) => {
-  const picker = document.getElementById(p);
-  const hex = document.getElementById(h);
-  picker.addEventListener('input', e => {
-    syncColorInputs(picker, hex, e.target.value);
-    updatePreview();
-  });
-  hex.addEventListener('input', e => {
-    syncColorInputs(picker, hex, e.target.value);
-    updatePreview();
-  });
-});
-
+].forEach(([p,h])=>{
   const picker=document.getElementById(p);
   const hex=document.getElementById(h);
   picker.addEventListener('input',e=>{
