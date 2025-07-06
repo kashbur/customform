@@ -163,8 +163,6 @@
         <div>
           <label for="mainHeadline" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
           <input id="mainHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="We're Expecting!" required />
-          <p class="text-xs text-gray-500 mt-1">This text will appear in ALL CAPS.</p>
-          <p class="text-xs font-medium mt-1" style="color:#c0dcca;">Note: This text will appear in ALL CAPS on your reveal page.</p>
           <label for="fontMain" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Main Headline Font</label>
           <select id="fontMain" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
             <option value="">Same as default</option>
@@ -182,7 +180,26 @@
           <div class="grid grid-cols-2 gap-2 mt-4">
             <div>
               <label for="mainTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-              <input id="mainTextColor" type="color" class="w-full h-10 border rounded" value="#000000" />
+              <select id="mainTextColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+                <option value="">Choose a color...</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="mainTextCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="mainTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                  <input type="text" id="mainTextHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                </div>
+              </div>
             </div>
             <div>
               <label for="mainOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
@@ -392,6 +409,8 @@ const els={
   fontDate:document.getElementById('fontDate'),
   fontFrom:document.getElementById('fontFrom'),
   mainTextColor:document.getElementById('mainTextColor'),
+  mainTextPicker:document.getElementById('mainTextPicker'),
+  mainTextHex:document.getElementById('mainTextHex'),
   mainOutlineColor:document.getElementById('mainOutlineColor'),
   mainBold:document.getElementById('mainBold'),
   mainItalic:document.getElementById('mainItalic'),
@@ -491,7 +510,7 @@ function updatePreview(){
     const fontDate=els.fontDate.value||font;
     const fontFrom=els.fontFrom.value||font;
 
-    const mainColor=els.mainTextColor.value||text;
+    const mainColor=getColorValue(els.mainTextColor,els.mainTextHex,text);
     const mainOutline=els.mainOutlineColor.value||outline;
     const subColor=els.subTextColor.value||text;
     const subOutline=els.subOutlineColor.value||outline;
@@ -557,7 +576,7 @@ function updatePreview(){
   },100);
 }
 
-['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','fontMain','fontSub','fontDate','fontFrom','mainTextColor','mainOutlineColor','mainBold','mainItalic','mainCaps','subTextColor','subOutlineColor','subBold','subItalic','subCaps','dateTextColor','dateOutlineColor','dateBold','dateItalic','dateCaps','fromTextColor','fromOutlineColor','fromBold','fromItalic','fromCaps','mainHeadline','message1','message2','photo','ending'].forEach(id=>{
+['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','fontMain','fontSub','fontDate','fontFrom','mainTextColor','mainTextPicker','mainTextHex','mainOutlineColor','mainBold','mainItalic','mainCaps','subTextColor','subOutlineColor','subBold','subItalic','subCaps','dateTextColor','dateOutlineColor','dateBold','dateItalic','dateCaps','fromTextColor','fromOutlineColor','fromBold','fromItalic','fromCaps','mainHeadline','message1','message2','photo','ending'].forEach(id=>{
   document.getElementById(id).addEventListener('input',updatePreview);
   document.getElementById(id).addEventListener('change',updatePreview);
 });
@@ -570,12 +589,16 @@ els.textColor.addEventListener('change',e=>{
   toggleCustomColor(els.textColor,document.getElementById('textCustom'),e.target.value);
   updatePreview();
 });
+els.mainTextColor.addEventListener('change',e=>{
+  toggleCustomColor(els.mainTextColor,document.getElementById('mainTextCustom'),e.target.value);
+  updatePreview();
+});
 els.outlineColor.addEventListener('change',e=>{
   toggleCustomColor(els.outlineColor,document.getElementById('outlineColorCustom'),e.target.value);
   updatePreview();
 });
 
-[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex']].forEach(([p,h])=>{
+[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex'],['mainTextPicker','mainTextHex']].forEach(([p,h])=>{
   const picker=document.getElementById(p);
   const hex=document.getElementById(h);
   picker.addEventListener('input',e=>{
@@ -628,7 +651,7 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
     date:els.message2.value.trim(),
     photo:els.photo.value.trim(),
     from:els.ending.value.trim(),
-    mainTextColor:els.mainTextColor.value,
+    mainTextColor:getColorValue(els.mainTextColor,els.mainTextHex,''),
     mainOutlineColor:els.mainOutlineColor.value,
     subTextColor:els.subTextColor.value,
     subOutlineColor:els.subOutlineColor.value,
