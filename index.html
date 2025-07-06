@@ -142,7 +142,27 @@
             </div>
             <div>
               <label for="mainOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-              <input id="mainOutlineColor" type="color" class="w-full h-10 border rounded" value="#ffffff" />
+              <select id="mainOutlineColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+                <option value="">Use Default</option>
+                <option value="transparent">None</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="mainOutlineCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="mainOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                  <input type="text" id="mainOutlineHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                </div>
+              </div>
             </div>
           </div>
           <div class="flex items-center space-x-4 mt-2">
@@ -476,6 +496,8 @@ const els={
   mainTextPicker:document.getElementById('mainTextPicker'),
   mainTextHex:document.getElementById('mainTextHex'),
   mainOutlineColor:document.getElementById('mainOutlineColor'),
+  mainOutlinePicker:document.getElementById('mainOutlinePicker'),
+  mainOutlineHex:document.getElementById('mainOutlineHex'),
   mainBold:document.getElementById('mainBold'),
   mainItalic:document.getElementById('mainItalic'),
   mainCaps:document.getElementById('mainCaps'),
@@ -590,7 +612,7 @@ function updatePreview(){
     const fontFrom=els.fontFrom.value||font;
 
     const mainColor=getColorValue(els.mainTextColor,els.mainTextHex,text);
-    const mainOutline=els.mainOutlineColor.value||outline;
+    const mainOutline=getColorValue(els.mainOutlineColor,els.mainOutlineHex,outline);
     const subColor=getColorValue(els.subTextColor,els.subTextHex,text);
     const subOutline=getColorValue(els.subOutlineColor,els.subOutlineHex,outline);
     const dateColor=getColorValue(els.dateTextColor,els.dateTextHex,text);
@@ -673,6 +695,8 @@ function updatePreview(){
   'mainTextPicker',
   'mainTextHex',
   'mainOutlineColor',
+  'mainOutlinePicker',
+  'mainOutlineHex',
   'mainBold',
   'mainItalic',
   'mainCaps',
@@ -728,6 +752,10 @@ els.mainTextColor.addEventListener('change', e => {
   toggleCustomColor(els.mainTextColor, document.getElementById('mainTextCustom'), e.target.value);
   updatePreview();
 });
+els.mainOutlineColor.addEventListener('change', e => {
+  toggleCustomColor(els.mainOutlineColor, document.getElementById('mainOutlineCustom'), e.target.value);
+  updatePreview();
+});
 els.outlineColor.addEventListener('change', e => {
   toggleCustomColor(els.outlineColor, document.getElementById('outlineColorCustom'), e.target.value);
   updatePreview();
@@ -762,6 +790,7 @@ els.fromOutlineColor.addEventListener('change', e => {
   ['textPicker','textHex'],
   ['outlinePicker','outlineHex'],
   ['mainTextPicker','mainTextHex'],
+  ['mainOutlinePicker','mainOutlineHex'],
   ['subTextPicker','subTextHex'],
   ['subOutlinePicker','subOutlineHex'],
   ['dateTextPicker','dateTextHex'],
@@ -822,7 +851,7 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
     photo:els.photo.value.trim(),
     from:els.ending.value.trim(),
     mainTextColor:getColorValue(els.mainTextColor,els.mainTextHex,''),
-    mainOutlineColor:els.mainOutlineColor.value,
+    mainOutlineColor:getColorValue(els.mainOutlineColor,els.mainOutlineHex,''),
     subTextColor:getColorValue(els.subTextColor,els.subTextHex,getColorValue(els.textColor,els.textHex,'')),
     subOutlineColor:getColorValue(els.subOutlineColor,els.subOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
     dateTextColor:getColorValue(els.dateTextColor,els.dateTextHex,getColorValue(els.textColor,els.textHex,'')),
