@@ -227,7 +227,7 @@
         <h2 class="text-2xl font-bold text-gray-800">Page 2</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-8">
         <div>
           <label for="message1" class="block text-sm font-semibold text-gray-700 mb-2">Message 1</label>
           <input id="message1" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Baby Johnson" required />
@@ -245,14 +245,53 @@
               <option value="Crimson Text">Crimson Text</option>
               <option value="Sacramento">Sacramento</option>
             </select>
-            <div class="grid grid-cols-2 gap-2 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
               <div>
                 <label for="subTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <input id="subTextColor" type="color" class="w-full h-10 border rounded" value="#000000" />
+                <select id="subTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="subTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="subTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="subTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
               </div>
               <div>
                 <label for="subOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <input id="subOutlineColor" type="color" class="w-full h-10 border rounded" value="#ffffff" />
+                <select id="subOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="subOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="subOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="subOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="flex items-center space-x-4 mt-2">
@@ -278,14 +317,53 @@
               <option value="Crimson Text">Crimson Text</option>
               <option value="Sacramento">Sacramento</option>
             </select>
-            <div class="grid grid-cols-2 gap-2 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
               <div>
                 <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <input id="dateTextColor" type="color" class="w-full h-10 border rounded" value="#000000" />
+                <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="dateTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
               </div>
               <div>
                 <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <input id="dateOutlineColor" type="color" class="w-full h-10 border rounded" value="#ffffff" />
+                <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="dateOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="flex items-center space-x-4 mt-2">
@@ -294,7 +372,79 @@
               <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
             </div>
         </div>
-        <div class="md:col-span-2">
+        <div>
+          <label for="ending" class="block text-sm font-semibold text-gray-700 mb-2">Ending Message (optional)</label>
+          <input id="ending" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Love, The Johnsons" />
+            <label for="fontFrom" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Final Message Font</label>
+            <select id="fontFrom" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <option value="">Same as default</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Lora">Lora</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Crimson Text">Crimson Text</option>
+              <option value="Sacramento">Sacramento</option>
+            </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <div>
+                <label for="fromTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+                <select id="fromTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="fromTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="fromTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="fromTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="fromOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+                <select id="fromOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="fromOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="fromOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="fromOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mt-2">
+              <label class="text-xs"><input id="fromBold" type="checkbox" class="mr-1" />Bold</label>
+              <label class="text-xs"><input id="fromItalic" type="checkbox" class="mr-1" />Italic</label>
+          <label class="text-xs"><input id="fromCaps" type="checkbox" class="mr-1" />Caps</label>
+            </div>
+        </div>
+        <div>
           <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
             Photo URL <span class="text-gray-400">(optional)</span>
             <span class="inline-block relative ml-1 group cursor-help">
@@ -318,39 +468,6 @@
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
           >
           <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
-        </div>
-        <div class="md:col-span-2">
-          <label for="ending" class="block text-sm font-semibold text-gray-700 mb-2">Ending Message (optional)</label>
-          <input id="ending" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Love, The Johnsons" />
-            <label for="fontFrom" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Final Message Font</label>
-            <select id="fontFrom" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-              <option value="">Same as default</option>
-              <option value="Poppins">Poppins</option>
-              <option value="Playfair Display">Playfair Display</option>
-              <option value="Dancing Script">Dancing Script</option>
-              <option value="Montserrat">Montserrat</option>
-              <option value="Great Vibes">Great Vibes</option>
-              <option value="Roboto">Roboto</option>
-              <option value="Lora">Lora</option>
-              <option value="Pacifico">Pacifico</option>
-              <option value="Crimson Text">Crimson Text</option>
-              <option value="Sacramento">Sacramento</option>
-            </select>
-            <div class="grid grid-cols-2 gap-2 mt-4">
-              <div>
-                <label for="fromTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <input id="fromTextColor" type="color" class="w-full h-10 border rounded" value="#000000" />
-              </div>
-              <div>
-                <label for="fromOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <input id="fromOutlineColor" type="color" class="w-full h-10 border rounded" value="#ffffff" />
-              </div>
-            </div>
-            <div class="flex items-center space-x-4 mt-2">
-              <label class="text-xs"><input id="fromBold" type="checkbox" class="mr-1" />Bold</label>
-              <label class="text-xs"><input id="fromItalic" type="checkbox" class="mr-1" />Italic</label>
-              <label class="text-xs"><input id="fromCaps" type="checkbox" class="mr-1" />Caps</label>
-            </div>
         </div>
       </div>
       <div class="flex flex-col items-center order-first md:order-none">
@@ -416,17 +533,29 @@ const els={
   mainItalic:document.getElementById('mainItalic'),
   mainCaps:document.getElementById('mainCaps'),
   subTextColor:document.getElementById('subTextColor'),
+  subTextPicker:document.getElementById('subTextPicker'),
+  subTextHex:document.getElementById('subTextHex'),
   subOutlineColor:document.getElementById('subOutlineColor'),
+  subOutlinePicker:document.getElementById('subOutlinePicker'),
+  subOutlineHex:document.getElementById('subOutlineHex'),
   subBold:document.getElementById('subBold'),
   subItalic:document.getElementById('subItalic'),
   subCaps:document.getElementById('subCaps'),
   dateTextColor:document.getElementById('dateTextColor'),
+  dateTextPicker:document.getElementById('dateTextPicker'),
+  dateTextHex:document.getElementById('dateTextHex'),
   dateOutlineColor:document.getElementById('dateOutlineColor'),
+  dateOutlinePicker:document.getElementById('dateOutlinePicker'),
+  dateOutlineHex:document.getElementById('dateOutlineHex'),
   dateBold:document.getElementById('dateBold'),
   dateItalic:document.getElementById('dateItalic'),
   dateCaps:document.getElementById('dateCaps'),
   fromTextColor:document.getElementById('fromTextColor'),
+  fromTextPicker:document.getElementById('fromTextPicker'),
+  fromTextHex:document.getElementById('fromTextHex'),
   fromOutlineColor:document.getElementById('fromOutlineColor'),
+  fromOutlinePicker:document.getElementById('fromOutlinePicker'),
+  fromOutlineHex:document.getElementById('fromOutlineHex'),
   fromBold:document.getElementById('fromBold'),
   fromItalic:document.getElementById('fromItalic'),
   fromCaps:document.getElementById('fromCaps'),
@@ -512,12 +641,12 @@ function updatePreview(){
 
     const mainColor=getColorValue(els.mainTextColor,els.mainTextHex,text);
     const mainOutline=els.mainOutlineColor.value||outline;
-    const subColor=els.subTextColor.value||text;
-    const subOutline=els.subOutlineColor.value||outline;
-    const dateColor=els.dateTextColor.value||text;
-    const dateOutline=els.dateOutlineColor.value||outline;
-    const fromColor=els.fromTextColor.value||text;
-    const fromOutline=els.fromOutlineColor.value||outline;
+    const subColor=getColorValue(els.subTextColor,els.subTextHex,text);
+    const subOutline=getColorValue(els.subOutlineColor,els.subOutlineHex,outline);
+    const dateColor=getColorValue(els.dateTextColor,els.dateTextHex,text);
+    const dateOutline=getColorValue(els.dateOutlineColor,els.dateOutlineHex,outline);
+    const fromColor=getColorValue(els.fromTextColor,els.fromTextHex,text);
+    const fromOutline=getColorValue(els.fromOutlineColor,els.fromOutlineHex,outline);
 
     const mainBold=els.mainBold.checked;
     const mainItalic=els.mainItalic.checked;
@@ -576,7 +705,62 @@ function updatePreview(){
   },100);
 }
 
-['backgroundTheme','backgroundPicker','backgroundHex','textColor','textPicker','textHex','outlineColor','outlinePicker','outlineHex','fontFamily','fontMain','fontSub','fontDate','fontFrom','mainTextColor','mainTextPicker','mainTextHex','mainOutlineColor','mainBold','mainItalic','mainCaps','subTextColor','subOutlineColor','subBold','subItalic','subCaps','dateTextColor','dateOutlineColor','dateBold','dateItalic','dateCaps','fromTextColor','fromOutlineColor','fromBold','fromItalic','fromCaps','mainHeadline','message1','message2','photo','ending'].forEach(id=>{
+[
+  'backgroundTheme',
+  'backgroundPicker',
+  'backgroundHex',
+  'textColor',
+  'textPicker',
+  'textHex',
+  'outlineColor',
+  'outlinePicker',
+  'outlineHex',
+  'fontFamily',
+  'fontMain',
+  'fontSub',
+  'fontDate',
+  'fontFrom',
+  'mainTextColor',
+  'mainOutlineColor',
+  'mainBold',
+  'mainItalic',
+  'mainCaps',
+  'subTextColor',
+  'subTextPicker',
+  'subTextHex',
+  'subOutlineColor',
+  'subOutlinePicker',
+  'subOutlineHex',
+  'subBold',
+  'subItalic',
+  'subCaps',
+  'dateTextColor',
+  'dateTextPicker',
+  'dateTextHex',
+  'dateOutlineColor',
+  'dateOutlinePicker',
+  'dateOutlineHex',
+  'dateBold',
+  'dateItalic',
+  'dateCaps',
+  'fromTextColor',
+  'fromTextPicker',
+  'fromTextHex',
+  'fromOutlineColor',
+  'fromOutlinePicker',
+  'fromOutlineHex',
+  'fromBold',
+  'fromItalic',
+  'fromCaps',
+  'mainHeadline',
+  'message1',
+  'message2',
+  'photo',
+  'ending'
+].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+  document.getElementById(id).addEventListener('change', updatePreview);
+});
   document.getElementById(id).addEventListener('input',updatePreview);
   document.getElementById(id).addEventListener('change',updatePreview);
 });
@@ -597,8 +781,53 @@ els.outlineColor.addEventListener('change',e=>{
   toggleCustomColor(els.outlineColor,document.getElementById('outlineColorCustom'),e.target.value);
   updatePreview();
 });
-
-[['backgroundPicker','backgroundHex'],['textPicker','textHex'],['outlinePicker','outlineHex'],['mainTextPicker','mainTextHex']].forEach(([p,h])=>{
+els.subTextColor.addEventListener('change',e=>{
+  toggleCustomColor(els.subTextColor,document.getElementById('subTextCustom'),e.target.value);
+  updatePreview();
+});
+els.subOutlineColor.addEventListener('change',e=>{
+  toggleCustomColor(els.subOutlineColor,document.getElementById('subOutlineCustom'),e.target.value);
+  updatePreview();
+});
+els.dateTextColor.addEventListener('change',e=>{
+  toggleCustomColor(els.dateTextColor,document.getElementById('dateTextCustom'),e.target.value);
+  updatePreview();
+});
+els.dateOutlineColor.addEventListener('change',e=>{
+  toggleCustomColor(els.dateOutlineColor,document.getElementById('dateOutlineCustom'),e.target.value);
+  updatePreview();
+});
+els.fromTextColor.addEventListener('change',e=>{
+  toggleCustomColor(els.fromTextColor,document.getElementById('fromTextCustom'),e.target.value);
+  updatePreview();
+});
+els.fromOutlineColor.addEventListener('change',e=>{
+  toggleCustomColor(els.fromOutlineColor,document.getElementById('fromOutlineCustom'),e.target.value);
+  updatePreview();
+});
+[
+  ['backgroundPicker','backgroundHex'],
+  ['textPicker','textHex'],
+  ['outlinePicker','outlineHex'],
+  ['mainTextPicker','mainTextHex'],
+  ['subTextPicker','subTextHex'],
+  ['subOutlinePicker','subOutlineHex'],
+  ['dateTextPicker','dateTextHex'],
+  ['dateOutlinePicker','dateOutlineHex'],
+  ['fromTextPicker','fromTextHex'],
+  ['fromOutlinePicker','fromOutlineHex']
+].forEach(([p,h])=>{
+  const picker=document.getElementById(p);
+  const hex=document.getElementById(h);
+  picker.addEventListener('input',e=>{
+    syncColorInputs(picker,hex,e.target.value);
+    updatePreview();
+  });
+  hex.addEventListener('input',e=>{
+    syncColorInputs(picker,hex,e.target.value);
+    updatePreview();
+  });
+});
   const picker=document.getElementById(p);
   const hex=document.getElementById(h);
   picker.addEventListener('input',e=>{
@@ -653,12 +882,12 @@ document.getElementById('revealForm').addEventListener('submit',async e=>{
     from:els.ending.value.trim(),
     mainTextColor:getColorValue(els.mainTextColor,els.mainTextHex,''),
     mainOutlineColor:els.mainOutlineColor.value,
-    subTextColor:els.subTextColor.value,
-    subOutlineColor:els.subOutlineColor.value,
-    dateTextColor:els.dateTextColor.value,
-    dateOutlineColor:els.dateOutlineColor.value,
-    fromTextColor:els.fromTextColor.value,
-    fromOutlineColor:els.fromOutlineColor.value,
+    subTextColor:getColorValue(els.subTextColor,els.subTextHex,getColorValue(els.textColor,els.textHex,'')),
+    subOutlineColor:getColorValue(els.subOutlineColor,els.subOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
+    dateTextColor:getColorValue(els.dateTextColor,els.dateTextHex,getColorValue(els.textColor,els.textHex,'')),
+    dateOutlineColor:getColorValue(els.dateOutlineColor,els.dateOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
+    fromTextColor:getColorValue(els.fromTextColor,els.fromTextHex,getColorValue(els.textColor,els.textHex,'')),
+    fromOutlineColor:getColorValue(els.fromOutlineColor,els.fromOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
     mainBold:els.mainBold.checked?1:0,
     mainItalic:els.mainItalic.checked?1:0,
     mainCaps:els.mainCaps.checked?1:0,
