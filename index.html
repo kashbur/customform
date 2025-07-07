@@ -454,7 +454,7 @@
     </div>
     <!-- Generate URL -->
     <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
-      <button type="submit" class="w-full py-3 rounded-lg font-semibold bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Generate My Reveal URL</button>
+      <button id="generateBtn" type="button" class="w-full py-3 rounded-lg font-semibold bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Generate My Reveal URL</button>
     </div>
   </form>
   <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
@@ -807,7 +807,7 @@ els.fromOutlineColor.addEventListener('change', e => {
 });
 
 updatePreview();
-const generateBtn=document.querySelector('#revealForm button[type="submit"]');
+const generateBtn=document.getElementById('generateBtn');
 const defaultText=generateBtn.textContent;
 const statusEl=document.getElementById('statusMsg');
 
@@ -827,7 +827,7 @@ function showConfettiAt(x,y){
     d.addEventListener('animationend',()=>d.remove());
   }
 }
-document.getElementById('revealForm').addEventListener('submit',async e=>{
+generateBtn.addEventListener('click',async e=>{
   e.preventDefault();
   generateBtn.disabled=true;
   const originalText=generateBtn.textContent;
