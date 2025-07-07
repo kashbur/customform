@@ -740,10 +740,12 @@ els.backgroundTheme.addEventListener('change',e=>{
   toggleCustomColor(els.backgroundTheme,document.getElementById('backgroundCustom'),e.target.value);
   updatePreview();
 });
-els.textColor.addEventListener('change', e => {
-  toggleCustomColor(els.textColor, document.getElementById('textCustom'), e.target.value);
-  updatePreview();
-});
+if(els.textColor){
+  els.textColor.addEventListener('change', e => {
+    toggleCustomColor(els.textColor, document.getElementById('textCustom'), e.target.value);
+    updatePreview();
+  });
+}
 els.mainTextColor.addEventListener('change', e => {
   toggleCustomColor(els.mainTextColor, document.getElementById('mainTextCustom'), e.target.value);
   updatePreview();
@@ -752,10 +754,12 @@ els.mainOutlineColor.addEventListener('change', e => {
   toggleCustomColor(els.mainOutlineColor, document.getElementById('mainOutlineCustom'), e.target.value);
   updatePreview();
 });
-els.outlineColor.addEventListener('change', e => {
-  toggleCustomColor(els.outlineColor, document.getElementById('outlineColorCustom'), e.target.value);
-  updatePreview();
-});
+if(els.outlineColor){
+  els.outlineColor.addEventListener('change', e => {
+    toggleCustomColor(els.outlineColor, document.getElementById('outlineColorCustom'), e.target.value);
+    updatePreview();
+  });
+}
 els.subTextColor.addEventListener('change', e => {
   toggleCustomColor(els.subTextColor, document.getElementById('subTextCustom'), e.target.value);
   updatePreview();
@@ -796,14 +800,16 @@ els.fromOutlineColor.addEventListener('change', e => {
 ].forEach(([p,h])=>{
   const picker=document.getElementById(p);
   const hex=document.getElementById(h);
-  picker.addEventListener('input',e=>{
-    syncColorInputs(picker,hex,e.target.value);
-    updatePreview();
-  });
-  hex.addEventListener('input',e=>{
-    syncColorInputs(picker,hex,e.target.value);
-    updatePreview();
-  });
+  if(picker && hex){
+    picker.addEventListener('input',e=>{
+      syncColorInputs(picker,hex,e.target.value);
+      updatePreview();
+    });
+    hex.addEventListener('input',e=>{
+      syncColorInputs(picker,hex,e.target.value);
+      updatePreview();
+    });
+  }
 });
 
 updatePreview();
@@ -832,6 +838,8 @@ generateBtn.addEventListener('click',async e=>{
   generateBtn.disabled=true;
   const originalText=generateBtn.textContent;
   generateBtn.textContent='Generating…';
+  const baseTextColor = els.textColor ? getColorValue(els.textColor, els.textHex, '') : '';
+  const baseOutlineColor = els.outlineColor ? getColorValue(els.outlineColor, els.outlineHex, '') : '';
   const params=new URLSearchParams({
     color:getColorValue(els.backgroundTheme,els.backgroundHex,''),
     textColor: DEFAULT_TEXT_COLOR,
@@ -848,12 +856,12 @@ generateBtn.addEventListener('click',async e=>{
     from:els.ending.value.trim(),
     mainTextColor:getColorValue(els.mainTextColor,els.mainTextHex,''),
     mainOutlineColor:getColorValue(els.mainOutlineColor,els.mainOutlineHex,''),
-    subTextColor:getColorValue(els.subTextColor,els.subTextHex,getColorValue(els.textColor,els.textHex,'')),
-    subOutlineColor:getColorValue(els.subOutlineColor,els.subOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
-    dateTextColor:getColorValue(els.dateTextColor,els.dateTextHex,getColorValue(els.textColor,els.textHex,'')),
-    dateOutlineColor:getColorValue(els.dateOutlineColor,els.dateOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
-    fromTextColor:getColorValue(els.fromTextColor,els.fromTextHex,getColorValue(els.textColor,els.textHex,'')),
-    fromOutlineColor:getColorValue(els.fromOutlineColor,els.fromOutlineHex,getColorValue(els.outlineColor,els.outlineHex,'')),
+    subTextColor:getColorValue(els.subTextColor,els.subTextHex,baseTextColor),
+    subOutlineColor:getColorValue(els.subOutlineColor,els.subOutlineHex,baseOutlineColor),
+    dateTextColor:getColorValue(els.dateTextColor,els.dateTextHex,baseTextColor),
+    dateOutlineColor:getColorValue(els.dateOutlineColor,els.dateOutlineHex,baseOutlineColor),
+    fromTextColor:getColorValue(els.fromTextColor,els.fromTextHex,baseTextColor),
+    fromOutlineColor:getColorValue(els.fromOutlineColor,els.fromOutlineHex,baseOutlineColor),
     mainBold:els.mainBold.checked?1:0,
     mainItalic:els.mainItalic.checked?1:0,
     mainCaps:els.mainCaps.checked?1:0,
