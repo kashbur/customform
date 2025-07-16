@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reveal Wizard</title>
+<style>
+  body { font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 1rem; }
+  .step { display: none; }
+  .step.active { display: block; }
+  .actions { margin-top: 1rem; }
+  .progress { font-weight: bold; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<h1>Big Reveal Wizard</h1>
+<form id="wizardForm">
+<p class="progress">Step <span id="stepNum">1</span> of <span id="stepTotal">7</span></p>
+<div class="step active" data-step="1">
+  <h2>Main Message</h2>
+  <p>What's your big reveal? Example: "It's a Girl!"</p>
+  <input id="main" name="main" required>
+  <div class="actions">
+    <button type="button" class="next" id="nextBtn1">Next</button>
+  </div>
+</div>
+<div class="step" data-step="2">
+  <h2>Include a Photo?</h2>
+  <label><input type="radio" name="hasPhoto" value="yes"> Yes</label>
+  <label><input type="radio" name="hasPhoto" value="no" checked> No</label>
+  <div id="photoField" style="display:none; margin-top:0.5rem;">
+    <label>Photo URL <input type="url" id="photo" name="photo"></label>
+  </div>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="button" class="next">Next</button>
+  </div>
+</div>
+<div class="step" data-step="3">
+  <h2>Include a Due Date or Detail?</h2>
+  <label><input type="radio" name="hasDate" value="yes"> Yes</label>
+  <label><input type="radio" name="hasDate" value="no" checked> No</label>
+  <div id="dateField" style="display:none; margin-top:0.5rem;">
+    <label>Detail Line <input type="text" id="date" name="date"></label>
+  </div>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="button" class="next">Next</button>
+  </div>
+</div>
+<div class="step" data-step="4">
+  <h2>Add a Signature?</h2>
+  <label><input type="radio" name="hasFrom" value="yes"> Yes</label>
+  <label><input type="radio" name="hasFrom" value="no" checked> No</label>
+  <div id="fromField" style="display:none; margin-top:0.5rem;">
+    <label>Signature <input type="text" id="from" name="from"></label>
+  </div>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="button" class="next">Next</button>
+  </div>
+</div>
+<div class="step" data-step="5">
+  <h2>Pick a Background Color</h2>
+  <label><input type="radio" name="color" value="beige" checked> Beige</label>
+  <label><input type="radio" name="color" value="pink"> Pink</label>
+  <label><input type="radio" name="color" value="blue"> Blue</label>
+  <label><input type="radio" name="color" value="custom"> Custom</label>
+  <div id="customColor" style="display:none; margin-top:0.5rem;">
+    <input type="text" id="colorHex" placeholder="#abcdef">
+  </div>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="button" class="next">Next</button>
+  </div>
+</div>
+<div class="step" data-step="6">
+  <h2>Advanced Options</h2>
+  <details>
+    <summary>Show text and font settings</summary>
+    <label style="display:block;margin-top:0.5rem;">Font for Main Message
+      <select id="fontMain" name="fontMain">
+        <option value="Poppins">Poppins</option>
+        <option value="Playfair Display">Playfair Display</option>
+        <option value="Dancing Script">Dancing Script</option>
+        <option value="Montserrat">Montserrat</option>
+      </select>
+    </label>
+    <label style="display:block;margin-top:0.5rem;">Font for Details
+      <select id="fontOther" name="fontOther">
+        <option value="Poppins">Poppins</option>
+        <option value="Playfair Display">Playfair Display</option>
+        <option value="Dancing Script">Dancing Script</option>
+        <option value="Montserrat">Montserrat</option>
+      </select>
+    </label>
+  </details>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="button" class="next">Next</button>
+  </div>
+</div>
+<div class="step" data-step="7">
+  <h2>Review and Launch</h2>
+  <div id="summary"></div>
+  <p><a id="resultLink" href="#" target="_blank"></a></p>
+  <div class="actions">
+    <button type="button" class="back">Back</button>
+    <button type="submit" id="launch">Launch My Reveal!</button>
+  </div>
+</div>
+</form>
+<script>
+const steps=document.querySelectorAll('.step');
+const total=steps.length;
+const stepNum=document.getElementById('stepNum');
+const stepTotal=document.getElementById('stepTotal');
+stepTotal.textContent=total;
+let current=0;
+function showStep(n){
+  steps.forEach((s,i)=>{s.classList.toggle('active',i===n);});
+  stepNum.textContent=n+1;
+}
+function next(){if(current<total-1){current++;showStep(current);}}
+function back(){if(current>0){current--;showStep(current);}}
+// event delegation for buttons
+document.getElementById('wizardForm').addEventListener('click',e=>{
+  if(e.target.classList.contains('next')){e.preventDefault();next();}
+  if(e.target.classList.contains('back')){e.preventDefault();back();}
+});
+// toggle fields
+document.querySelectorAll('input[name="hasPhoto"]').forEach(r=>r.addEventListener('change',()=>{
+  document.getElementById('photoField').style.display=document.querySelector('input[name="hasPhoto"]:checked').value==='yes'?'block':'none';
+}));
+document.querySelectorAll('input[name="hasDate"]').forEach(r=>r.addEventListener('change',()=>{
+  document.getElementById('dateField').style.display=document.querySelector('input[name="hasDate"]:checked').value==='yes'?'block':'none';
+}));
+document.querySelectorAll('input[name="hasFrom"]').forEach(r=>r.addEventListener('change',()=>{
+  document.getElementById('fromField').style.display=document.querySelector('input[name="hasFrom"]:checked').value==='yes'?'block':'none';
+}));
+document.querySelectorAll('input[name="color"]').forEach(r=>r.addEventListener('change',()=>{
+  document.getElementById('customColor').style.display=document.querySelector('input[name="color"]:checked').value==='custom'?'block':'none';
+}));
+function buildUrl(){
+  const base='https://bigreveal.joyjotstudio.store/';
+  const params=new URLSearchParams();
+  params.set('main',document.getElementById('main').value.trim());
+  if(document.querySelector('input[name="hasPhoto"]:checked').value==='yes'){
+    params.set('photo',document.getElementById('photo').value.trim());
+  }
+  if(document.querySelector('input[name="hasDate"]:checked').value==='yes'){
+    params.set('date',document.getElementById('date').value.trim());
+  }
+  if(document.querySelector('input[name="hasFrom"]:checked').value==='yes'){
+    params.set('from',document.getElementById('from').value.trim());
+  }
+  let color=document.querySelector('input[name="color"]:checked').value;
+  if(color==='custom'){color=document.getElementById('colorHex').value.trim();}
+  params.set('color',color);
+  params.set('fontMain',document.getElementById('fontMain').value);
+  params.set('fontSub',document.getElementById('fontOther').value);
+  params.set('fontDate',document.getElementById('fontOther').value);
+  params.set('fontFrom',document.getElementById('fontOther').value);
+  return base+'?'+params.toString();
+}
+function updateSummary(){
+  const lines=[];
+  lines.push('Main: '+document.getElementById('main').value);
+  if(document.querySelector('input[name="hasPhoto"]:checked').value==='yes')
+    lines.push('Photo: '+document.getElementById('photo').value);
+  if(document.querySelector('input[name="hasDate"]:checked').value==='yes')
+    lines.push('Detail: '+document.getElementById('date').value);
+  if(document.querySelector('input[name="hasFrom"]:checked').value==='yes')
+    lines.push('From: '+document.getElementById('from').value);
+  lines.push('Color: '+document.querySelector('input[name="color"]:checked').value);
+  document.getElementById('summary').innerHTML='<ul><li>'+lines.join('</li><li>')+'</li></ul>';
+  const url=buildUrl();
+  const link=document.getElementById('resultLink');
+  link.href=url;link.textContent=url;
+}
+// update summary when entering final step
+steps[total-1].querySelector('#launch').addEventListener('mouseover',updateSummary);
+// handle submit
+document.getElementById('wizardForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  updateSummary();
+  window.open(buildUrl(),'_blank');
+});
+showStep(0);
+</script>
+</body>
+</html>
