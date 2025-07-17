@@ -6,11 +6,12 @@
 <title>Announcement Wizard</title>
 <style>
   body{font-family:sans-serif;max-width:600px;margin:0 auto;padding:1rem;}
-  .step{display:none;}
-  .step.active{display:block;}
+  .form-step{display:none;}
+  .form-step.active{display:block;}
   .nav{margin-top:1rem;}
   label{display:block;margin:0.5rem 0;}
   progress{width:100%;}
+  .form-step-question{font-family:'Segoe UI',Tahoma,sans-serif;margin:1rem 0 0.5rem;}
 </style>
 </head>
 <body>
@@ -19,16 +20,18 @@
   <div id="progressText">Step 1 of 8</div>
   <progress id="progressBar" value="1" max="8"></progress>
 
-  <div class="step active" data-step="1">
+  <div class="form-step active" data-step="1">
     <h2>Background Color</h2>
     <p>What background color do you want for your announcement?</p>
+    <h2 class="form-step-question">What background color do you want for your reveal?</h2>
     <input type="color" id="color" name="color" value="#f3ddbb">
     <div class="nav"><button type="button" class="next">Next</button></div>
   </div>
 
-  <div class="step" data-step="2">
+  <div class="form-step" data-step="2">
     <h2>First Reveal Message</h2>
     <p>What's the first message that should appear after the reels spin?</p>
+    <h2 class="form-step-question">What do you want your first big message to say?</h2>
     <input type="text" id="main" name="main">
     <div class="nav">
       <button type="button" class="back">Back</button>
@@ -36,9 +39,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="3">
+  <div class="form-step" data-step="3">
     <h2>Style First Message</h2>
     <p>How should this first message look?</p>
+    <h2 class="form-step-question">Which font should this message use?</h2>
     <label>Font
       <select id="fontMain" name="fontMain">
         <option value="">Default</option>
@@ -48,8 +52,11 @@
         <option>Montserrat</option>
       </select>
     </label>
+    <h2 class="form-step-question">What color should the text be?</h2>
     <label>Text color <input type="color" id="mainTextColor" name="mainTextColor" value="#000000"></label>
+    <h2 class="form-step-question">Do you want an outline color around the text?</h2>
     <label>Outline color <input type="color" id="mainOutlineColor" name="mainOutlineColor" value="#000000"></label>
+    <h2 class="form-step-question">Do you want this message to be bold, italic, or all caps?</h2>
     <label><input type="checkbox" id="mainBold" name="mainBold"> Bold</label>
     <label><input type="checkbox" id="mainItalic" name="mainItalic"> Italic</label>
     <label><input type="checkbox" id="mainCaps" name="mainCaps"> ALL CAPS</label>
@@ -59,9 +66,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="4">
+  <div class="form-step" data-step="4">
     <h2>Follow-Up Message</h2>
     <p>What message should appear next on the second screen?</p>
+    <h2 class="form-step-question">Want to add a second message to appear after the first?</h2>
     <input type="text" id="sub" name="sub">
     <div class="nav">
       <button type="button" class="back">Back</button>
@@ -69,9 +77,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="5">
+  <div class="form-step" data-step="5">
     <h2>Style Follow-Up Message</h2>
     <p>How should the second message look?</p>
+    <h2 class="form-step-question">Pick a font for this second message.</h2>
     <label>Font
       <select id="fontSub" name="fontSub">
         <option value="">Default</option>
@@ -81,8 +90,11 @@
         <option>Montserrat</option>
       </select>
     </label>
+    <h2 class="form-step-question">What color should this second message be?</h2>
     <label>Text color <input type="color" id="subTextColor" name="subTextColor" value="#000000"></label>
+    <h2 class="form-step-question">Do you want an outline color for this message?</h2>
     <label>Outline color <input type="color" id="subOutlineColor" name="subOutlineColor" value="#000000"></label>
+    <h2 class="form-step-question">Should this message be bold, italic, or all caps?</h2>
     <label><input type="checkbox" id="subBold" name="subBold"> Bold</label>
     <label><input type="checkbox" id="subItalic" name="subItalic"> Italic</label>
     <label><input type="checkbox" id="subCaps" name="subCaps"> ALL CAPS</label>
@@ -92,9 +104,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="6">
+  <div class="form-step" data-step="6">
     <h2>Ending Note</h2>
     <p>Want to add a closing message or signature?</p>
+    <h2 class="form-step-question">Want to sign your reveal with a closing message like “Love, the Smiths”?</h2>
     <input type="text" id="from" name="from">
     <div class="nav">
       <button type="button" class="back">Back</button>
@@ -102,9 +115,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="7">
+  <div class="form-step" data-step="7">
     <h2>Style Closing Note</h2>
     <p>How should the closing message look?</p>
+    <h2 class="form-step-question">Pick a font for your closing line.</h2>
     <label>Font
       <select id="fontFrom" name="fontFrom">
         <option value="">Default</option>
@@ -114,8 +128,11 @@
         <option>Montserrat</option>
       </select>
     </label>
+    <h2 class="form-step-question">Choose a text color for the closing line.</h2>
     <label>Text color <input type="color" id="fromTextColor" name="fromTextColor" value="#000000"></label>
+    <h2 class="form-step-question">Do you want an outline on this line?</h2>
     <label>Outline color <input type="color" id="fromOutlineColor" name="fromOutlineColor" value="#000000"></label>
+    <h2 class="form-step-question">Should your closing be bold, italic, or all caps?</h2>
     <label><input type="checkbox" id="fromBold" name="fromBold"> Bold</label>
     <label><input type="checkbox" id="fromItalic" name="fromItalic"> Italic</label>
     <label><input type="checkbox" id="fromCaps" name="fromCaps"> ALL CAPS</label>
@@ -125,9 +142,10 @@
     </div>
   </div>
 
-  <div class="step" data-step="8">
+  <div class="form-step" data-step="8">
     <h2>Add Photo (Optional)</h2>
     <p>Want to include a circular photo?</p>
+    <h2 class="form-step-question">Would you like to include a photo (optional)?</h2>
     <input type="url" id="photo" name="photo" placeholder="https://example.com/photo.jpg">
     <div class="nav">
       <button type="button" class="back">Back</button>
@@ -141,7 +159,7 @@
 </div>
 
 <script>
-const steps=document.querySelectorAll('.step');
+const steps=document.querySelectorAll('.form-step');
 const progress=document.getElementById('progressBar');
 const progressText=document.getElementById('progressText');
 let current=0;
