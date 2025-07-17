@@ -355,35 +355,6 @@
             </div>
           </div>
         </details>
-        <hr class="my-6">
-        <details class="mb-4">
-          <summary class="font-semibold text-lg cursor-pointer">Photo Upload (optional)</summary>
-          <div class="mt-4 space-y-4">
-          <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
-            Photo URL <span class="text-gray-400">(optional)</span>
-            <span class="inline-block relative ml-1 group cursor-help">
-              <span class="bg-gray-400 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center hover:bg-gray-500">?</span>
-              <div class="absolute left-0 top-6 bg-gray-800 text-white text-xs rounded-lg p-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 shadow-lg">
-                <p><strong>Steps to upload:</strong></p>
-                <ol class="list-decimal ml-4 space-y-1">
-                  <li>Go to <strong>imgur.com/upload</strong></li>
-                  <li>Drag and drop your photo onto the page</li>
-                  <li>Copy the image link on the right</li>
-                  <li>Paste it here</li>
-                </ol>
-              </div>
-            </span>
-          </label>
-          <input
-            type="url"
-            id="photo"
-            name="photo"
-            placeholder="https://i.imgur.com/yourimage.jpg"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
-          >
-          <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
-          </div>
-        </details>
       </div>
       <div class="flex flex-col items-center order-first md:order-none">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 2</h3>
@@ -401,83 +372,111 @@
       <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
       <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
     </div>
+<!-- Photo Upload Step -->
+<div class="step form-step bg-white rounded-2xl shadow-xl p-8" id="photoStep">
+  <h2 class="form-step-question">Would you like to include a photo (optional)?</h2>
+  <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
+    Photo URL <span class="text-gray-400">(optional)</span>
+    <span class="inline-block relative ml-1 group cursor-help">
+      <span class="bg-gray-400 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center hover:bg-gray-500">?</span>
+      <div class="absolute left-0 top-6 bg-gray-800 text-white text-xs rounded-lg p-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 shadow-lg">
+        <p><strong>Steps to upload:</strong></p>
+        <ol class="list-decimal ml-4 space-y-1">
+          <li>Go to <strong>imgur.com/upload</strong></li>
+          <li>Drag and drop your photo onto the page</li>
+          <li>Copy the image link on the right</li>
+          <li>Paste it here</li>
+        </ol>
+      </div>
+    </span>
+  </label>
+  <input
+    type="url"
+    id="photo"
+    name="photo"
+    placeholder="https://i.imgur.com/yourimage.jpg"
+    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+  >
+  <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
+</div>
 
-    <!-- Message 2 Step -->
-    <div class="step form-step bg-white rounded-2xl shadow-xl p-8" id="section4">
-      <div class="flex items-center mb-6">
-        <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">D</div>
-        <h2 class="text-2xl font-bold text-gray-800">Message 2</h2>
+<!-- Message 2 Step -->
+<div class="step form-step bg-white rounded-2xl shadow-xl p-8" id="section4">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">D</div>
+    <h2 class="text-2xl font-bold text-gray-800">Message 2</h2>
+  </div>
+  <div class="space-y-4">
+    <p class="text-sm text-gray-700">What is your second message?</p>
+    <label for="message2" class="block text-sm font-semibold text-gray-700 mb-2">Message 2 (optional)</label>
+    <input id="message2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Coming soon!" />
+    <p class="text-sm text-gray-700 mt-4">Which font should this line use?</p>
+    <label for="fontDate" class="block text-sm font-semibold text-gray-700 mt-1 mb-2">Message 2 Font</label>
+    <select id="fontDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+      <option value="Poppins">Poppins</option>
+      <option value="Playfair Display">Playfair Display</option>
+      <option value="Dancing Script">Dancing Script</option>
+      <option value="Montserrat">Montserrat</option>
+      <option value="Great Vibes">Great Vibes</option>
+      <option value="Roboto">Roboto</option>
+      <option value="Lora">Lora</option>
+      <option value="Pacifico">Pacifico</option>
+      <option value="Crimson Text">Crimson Text</option>
+      <option value="Sacramento">Sacramento</option>
+    </select>
+    <p class="text-sm text-gray-700 mt-4">What text color would you like?</p>
+    <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+    <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+      <option value="">Use Default</option>
+      <option value="#000000">Black</option>
+      <option value="#ffffff">White</option>
+      <option value="#374151">Dark Gray</option>
+      <option value="#dc2626">Red</option>
+      <option value="#ea580c">Orange</option>
+      <option value="#ca8a04">Yellow</option>
+      <option value="#16a34a">Green</option>
+      <option value="#2563eb">Blue</option>
+      <option value="#7c3aed">Purple</option>
+      <option value="#ff69b4">Pink</option>
+      <option value="custom">Custom Color</option>
+    </select>
+    <div id="dateTextCustom" class="hidden">
+      <div class="flex items-center space-x-3">
+        <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+        <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
       </div>
-      <div class="space-y-4">
-        <p class="text-sm text-gray-700">What is your second message?</p>
-        <label for="message2" class="block text-sm font-semibold text-gray-700 mb-2">Message 2 (optional)</label>
-        <input id="message2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Coming soon!" />
-        <p class="text-sm text-gray-700 mt-4">Which font should this line use?</p>
-        <label for="fontDate" class="block text-sm font-semibold text-gray-700 mt-1 mb-2">Message 2 Font</label>
-        <select id="fontDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-            <option value="Poppins">Poppins</option>
-            <option value="Playfair Display">Playfair Display</option>
-            <option value="Dancing Script">Dancing Script</option>
-            <option value="Montserrat">Montserrat</option>
-            <option value="Great Vibes">Great Vibes</option>
-            <option value="Roboto">Roboto</option>
-            <option value="Lora">Lora</option>
-            <option value="Pacifico">Pacifico</option>
-            <option value="Crimson Text">Crimson Text</option>
-            <option value="Sacramento">Sacramento</option>
-        </select>
-        <p class="text-sm text-gray-700 mt-4">What text color would you like?</p>
-        <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-        <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-          <option value="">Use Default</option>
-          <option value="#000000">Black</option>
-          <option value="#ffffff">White</option>
-          <option value="#374151">Dark Gray</option>
-          <option value="#dc2626">Red</option>
-          <option value="#ea580c">Orange</option>
-          <option value="#ca8a04">Yellow</option>
-          <option value="#16a34a">Green</option>
-          <option value="#2563eb">Blue</option>
-          <option value="#7c3aed">Purple</option>
-          <option value="#ff69b4">Pink</option>
-          <option value="custom">Custom Color</option>
-        </select>
-        <div id="dateTextCustom" class="hidden">
-          <div class="flex items-center space-x-3">
-            <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
-            <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
-          </div>
-        </div>
-        <p class="text-sm text-gray-700 mt-4">What outline color should we apply?</p>
-        <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-        <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-          <option value="">Use Default</option>
-          <option value="transparent">None</option>
-          <option value="#000000">Black</option>
-          <option value="#ffffff">White</option>
-          <option value="#374151">Dark Gray</option>
-          <option value="#dc2626">Red</option>
-          <option value="#ea580c">Orange</option>
-          <option value="#ca8a04">Yellow</option>
-          <option value="#16a34a">Green</option>
-          <option value="#2563eb">Blue</option>
-          <option value="#7c3aed">Purple</option>
-          <option value="#ff69b4">Pink</option>
-          <option value="custom">Custom Color</option>
-        </select>
-        <div id="dateOutlineCustom" class="hidden">
-          <div class="flex items-center space-x-3">
-            <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
-            <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
-          </div>
-        </div>
-        <p class="text-sm text-gray-700 mt-2">Apply any special styling?</p>
-        <div class="flex items-center space-x-4 mt-2">
-          <label class="text-xs"><input id="dateBold" type="checkbox" class="mr-1" />Bold</label>
-          <label class="text-xs"><input id="dateItalic" type="checkbox" class="mr-1" />Italic</label>
-          <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
-        </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-4">What outline color should we apply?</p>
+    <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+    <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+      <option value="">Use Default</option>
+      <option value="transparent">None</option>
+      <option value="#000000">Black</option>
+      <option value="#ffffff">White</option>
+      <option value="#374151">Dark Gray</option>
+      <option value="#dc2626">Red</option>
+      <option value="#ea580c">Orange</option>
+      <option value="#ca8a04">Yellow</option>
+      <option value="#16a34a">Green</option>
+      <option value="#2563eb">Blue</option>
+      <option value="#7c3aed">Purple</option>
+      <option value="#ff69b4">Pink</option>
+      <option value="custom">Custom Color</option>
+    </select>
+    <div id="dateOutlineCustom" class="hidden">
+      <div class="flex items-center space-x-3">
+        <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+        <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
       </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-2">Apply any special styling?</p>
+    <div class="flex items-center space-x-4 mt-2">
+      <label class="text-xs"><input id="dateBold" type="checkbox" class="mr-1" />Bold</label>
+      <label class="text-xs"><input id="dateItalic" type="checkbox" class="mr-1" />Italic</label>
+      <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
+    </div>
+  </div>
+</div>
       <div class="flex justify-between mt-4">
         <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
         <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
