@@ -1,228 +1,955 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Announcement Wizard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Big Reveal Generator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Roboto:wght@300;400;500;700&family=Lora:wght@400;500;600;700&family=Pacifico&family=Crimson+Text:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
 <style>
-  body{font-family:sans-serif;max-width:600px;margin:0 auto;padding:1rem;}
-  .form-step{display:none;}
-  .form-step.active{display:block;}
-  .nav{margin-top:1rem;}
-  label{display:block;margin:0.5rem 0;}
-  progress{width:100%;}
-  .form-step-question{font-family:'Segoe UI',Tahoma,sans-serif;margin:1rem 0 0.5rem;}
+  body { font-family: 'Poppins', sans-serif; }
+  input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,184,141,0.2); border-color:#ffb88d; }
+  .step { display:none; }
+  .step.active { display:block; }
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    opacity: 0;
+    animation: confetti 700ms ease-out forwards;
+  }
+  @keyframes confetti {
+    from { transform: translate(0,0); opacity: 1; }
+    to { transform: translate(var(--dx), var(--dy)) rotate(720deg); opacity: 0; }
+  }
 </style>
 </head>
-<body>
-<h1>Create Your Announcement</h1>
-<form id="wizard">
-  <div id="progressText">Step 1 of 8</div>
-  <progress id="progressBar" value="1" max="8"></progress>
-
-  <div class="form-step active" data-step="1">
-    <h2>Background Color</h2>
-    <p>What background color do you want for your announcement?</p>
-    <h2 class="form-step-question">What background color do you want for your reveal?</h2>
-    <input type="color" id="color" name="color" value="#f3ddbb">
-    <div class="nav"><button type="button" class="next">Next</button></div>
-  </div>
-
-  <div class="form-step" data-step="2">
-    <h2>First Reveal Message</h2>
-    <p>What's the first message that should appear after the reels spin?</p>
-    <h2 class="form-step-question">What do you want your first big message to say?</h2>
-    <input type="text" id="main" name="main">
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
+<body class="min-h-screen py-8" style="background-color:#ffe4b7;">
+<!-- Password Screen -->
+<div id="passwordScreen" class="max-w-md mx-auto">
+  <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+    <div class="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full" style="background-color:#ffb88d;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="#1f2937" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6-6V8a6 6 0 1112 0v3m3 3v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7h16z" />
+      </svg>
     </div>
+    <h1 class="text-2xl font-bold mb-4" style="color:#1f2937;">Access Required</h1>
+    <p class="mb-6" style="color:#6b7280;">To access this template please type in the code found in your purchase PDF</p>
+    <form id="passwordForm" class="space-y-4">
+      <input id="passwordInput" type="password" placeholder="Enter code" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center font-mono text-lg tracking-wider" />
+      <button type="submit" class="w-full py-3 rounded-lg font-semibold bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Access Template</button>
+      <div id="passwordError" class="text-red-500 text-sm hidden">Incorrect code.</div>
+    </form>
+    <p class="mt-6 text-sm" style="color:#6b7280;">If you need help, please message <a href="https://www.etsy.com/shop/JoyJotStudio" class="hover:underline" style="color:#ffb88d;">Joy Jot Studio</a> on Etsy</p>
   </div>
-
-  <div class="form-step" data-step="3">
-    <h2>Style First Message</h2>
-    <p>How should this first message look?</p>
-    <h2 class="form-step-question">Which font should this message use?</h2>
-    <label>Font
-      <select id="fontMain" name="fontMain">
-        <option value="">Default</option>
-        <option>Poppins</option>
-        <option>Playfair Display</option>
-        <option>Dancing Script</option>
-        <option>Montserrat</option>
-      </select>
-    </label>
-    <h2 class="form-step-question">What color should the text be?</h2>
-    <label>Text color <input type="color" id="mainTextColor" name="mainTextColor" value="#000000"></label>
-    <h2 class="form-step-question">Do you want an outline color around the text?</h2>
-    <label>Outline color <input type="color" id="mainOutlineColor" name="mainOutlineColor" value="#000000"></label>
-    <h2 class="form-step-question">Do you want this message to be bold, italic, or all caps?</h2>
-    <label><input type="checkbox" id="mainBold" name="mainBold"> Bold</label>
-    <label><input type="checkbox" id="mainItalic" name="mainItalic"> Italic</label>
-    <label><input type="checkbox" id="mainCaps" name="mainCaps"> ALL CAPS</label>
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
-    </div>
-  </div>
-
-  <div class="form-step" data-step="4">
-    <h2>Follow-Up Message</h2>
-    <p>What message should appear next on the second screen?</p>
-    <h2 class="form-step-question">Want to add a second message to appear after the first?</h2>
-    <input type="text" id="sub" name="sub">
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
-    </div>
-  </div>
-
-  <div class="form-step" data-step="5">
-    <h2>Style Follow-Up Message</h2>
-    <p>How should the second message look?</p>
-    <h2 class="form-step-question">Pick a font for this second message.</h2>
-    <label>Font
-      <select id="fontSub" name="fontSub">
-        <option value="">Default</option>
-        <option>Poppins</option>
-        <option>Playfair Display</option>
-        <option>Dancing Script</option>
-        <option>Montserrat</option>
-      </select>
-    </label>
-    <h2 class="form-step-question">What color should this second message be?</h2>
-    <label>Text color <input type="color" id="subTextColor" name="subTextColor" value="#000000"></label>
-    <h2 class="form-step-question">Do you want an outline color for this message?</h2>
-    <label>Outline color <input type="color" id="subOutlineColor" name="subOutlineColor" value="#000000"></label>
-    <h2 class="form-step-question">Should this message be bold, italic, or all caps?</h2>
-    <label><input type="checkbox" id="subBold" name="subBold"> Bold</label>
-    <label><input type="checkbox" id="subItalic" name="subItalic"> Italic</label>
-    <label><input type="checkbox" id="subCaps" name="subCaps"> ALL CAPS</label>
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
-    </div>
-  </div>
-
-  <div class="form-step" data-step="6">
-    <h2>Ending Note</h2>
-    <p>Want to add a closing message or signature?</p>
-    <h2 class="form-step-question">Want to sign your reveal with a closing message like “Love, the Smiths”?</h2>
-    <input type="text" id="from" name="from">
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
-    </div>
-  </div>
-
-  <div class="form-step" data-step="7">
-    <h2>Style Closing Note</h2>
-    <p>How should the closing message look?</p>
-    <h2 class="form-step-question">Pick a font for your closing line.</h2>
-    <label>Font
-      <select id="fontFrom" name="fontFrom">
-        <option value="">Default</option>
-        <option>Poppins</option>
-        <option>Playfair Display</option>
-        <option>Dancing Script</option>
-        <option>Montserrat</option>
-      </select>
-    </label>
-    <h2 class="form-step-question">Choose a text color for the closing line.</h2>
-    <label>Text color <input type="color" id="fromTextColor" name="fromTextColor" value="#000000"></label>
-    <h2 class="form-step-question">Do you want an outline on this line?</h2>
-    <label>Outline color <input type="color" id="fromOutlineColor" name="fromOutlineColor" value="#000000"></label>
-    <h2 class="form-step-question">Should your closing be bold, italic, or all caps?</h2>
-    <label><input type="checkbox" id="fromBold" name="fromBold"> Bold</label>
-    <label><input type="checkbox" id="fromItalic" name="fromItalic"> Italic</label>
-    <label><input type="checkbox" id="fromCaps" name="fromCaps"> ALL CAPS</label>
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" class="next">Next</button>
-    </div>
-  </div>
-
-  <div class="form-step" data-step="8">
-    <h2>Add Photo (Optional)</h2>
-    <p>Want to include a circular photo?</p>
-    <h2 class="form-step-question">Would you like to include a photo (optional)?</h2>
-    <input type="url" id="photo" name="photo" placeholder="https://example.com/photo.jpg">
-    <div class="nav">
-      <button type="button" class="back">Back</button>
-      <button type="button" id="generate">Generate My Link</button>
-    </div>
-  </div>
-</form>
-
-<div id="result" style="display:none;margin-top:1rem;">
-  <label>Your Link:<input type="text" id="resultUrl" readonly style="width:100%;"></label>
 </div>
-
+<!-- Main Application -->
+<div id="mainApp" class="max-w-6xl mx-auto px-4 hidden">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold" style="color:#1f2937;">Big Reveal Generator</h1>
+    <p class="text-gray-600">Create your personalized reveal page and get a shareable link!</p>
+  </div>
+  <form id="revealForm" class="space-y-8">
+    <div id="progress" class="font-semibold text-center mb-4"></div>
+    <!-- Section 1 -->
+    <div class="step bg-white rounded-2xl shadow-xl p-8" id="section1">
+      <div class="flex items-center mb-6">
+        <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">A</div>
+        <h2 class="text-2xl font-bold text-gray-800">Background Color</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label for="backgroundTheme" class="block text-sm font-semibold text-gray-700 mb-2">Background Color</label>
+          <select id="backgroundTheme" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3" required>
+            <option value="">Choose a theme...</option>
+            <option value="beige">Beige</option>
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+            <option value="gold">Gold</option>
+            <option value="white">White</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="backgroundCustom" class="hidden">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="backgroundPicker" class="w-12 h-12 border rounded-lg" value="#eedec5" />
+              <input type="text" id="backgroundHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#eedec5" />
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="flex flex-col items-center order-first md:order-none">
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview</h3>
+          <div id="previewBackground" class="flex items-center justify-center rounded-lg w-32 h-20" style="background-color:#f3f3f3;">
+            <div id="previewText" class="text-center break-words hidden">
+              <h1 id="previewMain" class="text-3xl font-bold">Your Text Here</h1>
+              <p id="previewSub" class="text-lg">This will be the style for the reveal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end mt-4">
+        <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+      </div>
+    </div>
+    <!-- Section 2 -->
+    <div class="step bg-white rounded-2xl shadow-xl p-8" id="section2">
+      <div class="flex items-center mb-6">
+        <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">B</div>
+        <h2 class="text-2xl font-bold text-gray-800">Page 1</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label for="mainHeadline" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
+          <input id="mainHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="We're Expecting!" required />
+          <label for="fontMain" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Main Headline Font</label>
+          <select id="fontMain" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+            <option value="Poppins">Poppins</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Great Vibes">Great Vibes</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Lora">Lora</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Crimson Text">Crimson Text</option>
+            <option value="Sacramento">Sacramento</option>
+          </select>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <div>
+              <label for="mainTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+              <select id="mainTextColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+                <option value="">Choose a color...</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="mainTextCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="mainTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                  <input type="text" id="mainTextHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <label for="mainOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+              <select id="mainOutlineColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+                <option value="">Use Default</option>
+                <option value="transparent">None</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="mainOutlineCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="mainOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                  <input type="text" id="mainOutlineHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 mt-2">
+            <label class="text-xs"><input id="mainBold" type="checkbox" class="mr-1" />Bold</label>
+            <label class="text-xs"><input id="mainItalic" type="checkbox" class="mr-1" />Italic</label>
+            <label class="text-xs"><input id="mainCaps" type="checkbox" class="mr-1" checked />Caps</label>
+          </div>
+        </div>
+        <div class="flex flex-col items-center order-first md:order-none">
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 1</h3>
+          <div id="preview1Background" class="flex items-center justify-center rounded-lg w-fit max-w-[8rem] p-2" style="background-color:#f3f3f3;">
+            <h1 id="preview1Text" class="text-4xl font-bold break-words text-center" style="display:none"></h1>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="flex justify-between mt-4">
+        <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+        <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+      </div>
+      <!-- Section 3 -->
+    <div class="step bg-white rounded-2xl shadow-xl p-8" id="section3">
+      <div class="flex items-center mb-6">
+        <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">C</div>
+        <h2 class="text-2xl font-bold text-gray-800">Page 2</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-8">
+        <details class="mb-4">
+          <summary class="font-semibold text-lg cursor-pointer">Message 1</summary>
+          <div class="mt-4 space-y-4">
+          <label for="message1" class="block text-sm font-semibold text-gray-700 mb-2">Message 1</label>
+          <input id="message1" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Baby Johnson" required />
+          <label for="fontSub" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Message 1 Font</label>
+          <select id="fontSub" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <option value="Poppins">Poppins</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Lora">Lora</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Crimson Text">Crimson Text</option>
+              <option value="Sacramento">Sacramento</option>
+            </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <div>
+                <label for="subTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+                <select id="subTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="subTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="subTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="subTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="subOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+                <select id="subOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="subOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="subOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="subOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mt-2">
+              <label class="text-xs"><input id="subBold" type="checkbox" class="mr-1" />Bold</label>
+              <label class="text-xs"><input id="subItalic" type="checkbox" class="mr-1" />Italic</label>
+              <label class="text-xs"><input id="subCaps" type="checkbox" class="mr-1" checked />Caps</label>
+            </div>
+          </div>
+        </details>
+        <hr class="my-6">
+        <details class="mb-4">
+          <summary class="font-semibold text-lg cursor-pointer">Message 2 (optional)</summary>
+          <div class="mt-4 space-y-4">
+          <label for="message2" class="block text-sm font-semibold text-gray-700 mb-2">Message 2 (optional)</label>
+          <input id="message2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Coming soon!" />
+          <label for="fontDate" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Message 2 Font</label>
+          <select id="fontDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <option value="Poppins">Poppins</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Lora">Lora</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Crimson Text">Crimson Text</option>
+              <option value="Sacramento">Sacramento</option>
+            </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <div>
+                <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+                <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="dateTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+                <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="dateOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mt-2">
+              <label class="text-xs"><input id="dateBold" type="checkbox" class="mr-1" />Bold</label>
+              <label class="text-xs"><input id="dateItalic" type="checkbox" class="mr-1" />Italic</label>
+              <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
+            </div>
+          </div>
+        </details>
+        <hr class="my-6">
+        <details class="mb-4">
+          <summary class="font-semibold text-lg cursor-pointer">Ending Message (optional)</summary>
+          <div class="mt-4 space-y-4">
+          <label for="ending" class="block text-sm font-semibold text-gray-700 mb-2">Ending Message (optional)</label>
+          <input id="ending" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Love, The Johnsons" />
+          <label for="fontFrom" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Final Message Font</label>
+          <select id="fontFrom" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+              <option value="Poppins">Poppins</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Roboto">Roboto</option>
+              <option value="Lora">Lora</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Crimson Text">Crimson Text</option>
+              <option value="Sacramento">Sacramento</option>
+            </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <div>
+                <label for="fromTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+                <select id="fromTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="fromTextCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="fromTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                    <input type="text" id="fromTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="fromOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+                <select id="fromOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                  <option value="">Use Default</option>
+                  <option value="transparent">None</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#374151">Dark Gray</option>
+                  <option value="#dc2626">Red</option>
+                  <option value="#ea580c">Orange</option>
+                  <option value="#ca8a04">Yellow</option>
+                  <option value="#16a34a">Green</option>
+                  <option value="#2563eb">Blue</option>
+                  <option value="#7c3aed">Purple</option>
+                  <option value="#ff69b4">Pink</option>
+                  <option value="custom">Custom Color</option>
+                </select>
+                <div id="fromOutlineCustom" class="hidden">
+                  <div class="flex items-center space-x-3">
+                    <input type="color" id="fromOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                    <input type="text" id="fromOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4 mt-2">
+              <label class="text-xs"><input id="fromBold" type="checkbox" class="mr-1" />Bold</label>
+              <label class="text-xs"><input id="fromItalic" type="checkbox" class="mr-1" />Italic</label>
+          <label class="text-xs"><input id="fromCaps" type="checkbox" class="mr-1" />Caps</label>
+            </div>
+          </div>
+        </details>
+        <hr class="my-6">
+        <details class="mb-4">
+          <summary class="font-semibold text-lg cursor-pointer">Photo Upload (optional)</summary>
+          <div class="mt-4 space-y-4">
+          <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
+            Photo URL <span class="text-gray-400">(optional)</span>
+            <span class="inline-block relative ml-1 group cursor-help">
+              <span class="bg-gray-400 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center hover:bg-gray-500">?</span>
+              <div class="absolute left-0 top-6 bg-gray-800 text-white text-xs rounded-lg p-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10 shadow-lg">
+                <p><strong>Steps to upload:</strong></p>
+                <ol class="list-decimal ml-4 space-y-1">
+                  <li>Go to <strong>imgur.com/upload</strong></li>
+                  <li>Drag and drop your photo onto the page</li>
+                  <li>Copy the image link on the right</li>
+                  <li>Paste it here</li>
+                </ol>
+              </div>
+            </span>
+          </label>
+          <input
+            type="url"
+            id="photo"
+            name="photo"
+            placeholder="https://i.imgur.com/yourimage.jpg"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
+          >
+          <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
+          </div>
+        </details>
+      </div>
+      <div class="flex flex-col items-center order-first md:order-none">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 2</h3>
+        <div id="preview2Background" class="flex items-center justify-center rounded-lg w-fit max-w-[8rem] p-2" style="background-color:#f3f3f3;">
+          <div id="preview2Text" class="text-center space-y-3 break-words">
+            <h2 id="preview2Msg1" class="text-2xl font-bold" style="display:none"></h2>
+            <p id="preview2Msg2" class="text-lg" style="display:none"></p>
+            <div id="preview2Photo" style="display:none"></div>
+            <p id="preview2Ending" class="italic" style="display:none"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-between mt-4">
+      <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+      <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+    </div>
+    <!-- Generate URL -->
+    <div class="step bg-white rounded-2xl shadow-xl p-8 text-center" id="generateStep">
+      <button id="generateBtn" type="button" class="w-full py-3 rounded-lg font-semibold bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Generate My Reveal URL</button>
+      <div class="flex justify-start mt-4">
+        <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+      </div>
+    </div>
+  </form>
+  <div id="urlResult" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center">
+    <h2 id="resultHeading" class="text-2xl font-bold mb-2" style="color:#1f2937;">Your Reveal URL is Ready!</h2>
+    <p id="resultSub" class="mb-2 text-gray-700 hidden">Your link has been shortened to hide the surprise! Share this clean link with friends and family.</p>
+    <p class="font-semibold mb-1">Your shareable link:</p>
+    <div class="flex flex-col md:flex-row items-center mb-4">
+      <input id="generatedUrl" readonly class="w-full md:flex-1 px-3 py-2 border border-gray-300 rounded text-sm mb-2 md:mb-0" />
+      <button id="copyBtn" type="button" class="w-full md:w-auto md:ml-2 px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]" aria-live="polite">Copy</button>
+    </div>
+    <div id="statusMsg" class="text-sm text-gray-700 mb-3"></div>
+    <a id="previewLink" href="#" target="_blank" class="block text-center py-2 rounded mb-3 bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Preview Page</a>
+    <button id="newBtn" class="w-full py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Create Another</button>
+  </div>
+</div>
 <script>
-const steps=document.querySelectorAll('.form-step');
-const progress=document.getElementById('progressBar');
-const progressText=document.getElementById('progressText');
-let current=0;
-function showStep(i){
-  steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));
-  progress.value=i+1;
-  progressText.textContent=`Step ${i+1} of ${steps.length}`;
+(function(){
+  const accepted=['08260','Gke0907!'];
+  const form=document.getElementById('passwordForm');
+  const screen=document.getElementById('passwordScreen');
+  const app=document.getElementById('mainApp');
+  const error=document.getElementById('passwordError');
+  if(sessionStorage.getItem('access')==='granted'){screen.classList.add('hidden');app.classList.remove('hidden');}
+  form.addEventListener('submit',e=>{e.preventDefault();if(accepted.includes(document.getElementById('passwordInput').value.trim())){sessionStorage.setItem('access','granted');screen.classList.add('hidden');app.classList.remove('hidden');}else{error.classList.remove('hidden');}});
+})();
+const els={
+  backgroundTheme:document.getElementById('backgroundTheme'),
+  backgroundPicker:document.getElementById('backgroundPicker'),
+  backgroundHex:document.getElementById('backgroundHex'),
+  fontMain:document.getElementById('fontMain'),
+  fontSub:document.getElementById('fontSub'),
+  fontDate:document.getElementById('fontDate'),
+  fontFrom:document.getElementById('fontFrom'),
+  mainTextColor:document.getElementById('mainTextColor'),
+  mainTextPicker:document.getElementById('mainTextPicker'),
+  mainTextHex:document.getElementById('mainTextHex'),
+  mainOutlineColor:document.getElementById('mainOutlineColor'),
+  mainOutlinePicker:document.getElementById('mainOutlinePicker'),
+  mainOutlineHex:document.getElementById('mainOutlineHex'),
+  mainBold:document.getElementById('mainBold'),
+  mainItalic:document.getElementById('mainItalic'),
+  mainCaps:document.getElementById('mainCaps'),
+  subTextColor:document.getElementById('subTextColor'),
+  subTextPicker:document.getElementById('subTextPicker'),
+  subTextHex:document.getElementById('subTextHex'),
+  subOutlineColor:document.getElementById('subOutlineColor'),
+  subOutlinePicker:document.getElementById('subOutlinePicker'),
+  subOutlineHex:document.getElementById('subOutlineHex'),
+  subBold:document.getElementById('subBold'),
+  subItalic:document.getElementById('subItalic'),
+  subCaps:document.getElementById('subCaps'),
+  dateTextColor:document.getElementById('dateTextColor'),
+  dateTextPicker:document.getElementById('dateTextPicker'),
+  dateTextHex:document.getElementById('dateTextHex'),
+  dateOutlineColor:document.getElementById('dateOutlineColor'),
+  dateOutlinePicker:document.getElementById('dateOutlinePicker'),
+  dateOutlineHex:document.getElementById('dateOutlineHex'),
+  dateBold:document.getElementById('dateBold'),
+  dateItalic:document.getElementById('dateItalic'),
+  dateCaps:document.getElementById('dateCaps'),
+  fromTextColor:document.getElementById('fromTextColor'),
+  fromTextPicker:document.getElementById('fromTextPicker'),
+  fromTextHex:document.getElementById('fromTextHex'),
+  fromOutlineColor:document.getElementById('fromOutlineColor'),
+  fromOutlinePicker:document.getElementById('fromOutlinePicker'),
+  fromOutlineHex:document.getElementById('fromOutlineHex'),
+  fromBold:document.getElementById('fromBold'),
+  fromItalic:document.getElementById('fromItalic'),
+  fromCaps:document.getElementById('fromCaps'),
+  mainHeadline:document.getElementById('mainHeadline'),
+  message1:document.getElementById('message1'),
+  message2:document.getElementById('message2'),
+  photo:document.getElementById('photo'),
+  ending:document.getElementById('ending'),
+  previewBackground:document.getElementById('previewBackground'),
+  previewMain:document.getElementById('previewMain'),
+  previewSub:document.getElementById('previewSub'),
+  preview1Background:document.getElementById('preview1Background'),
+  preview1Text:document.getElementById('preview1Text'),
+  preview2Background:document.getElementById('preview2Background'),
+  preview2Msg1:document.getElementById('preview2Msg1'),
+  preview2Msg2:document.getElementById('preview2Msg2'),
+  preview2Photo:document.getElementById('preview2Photo'),
+  preview2Ending:document.getElementById('preview2Ending')
+};
+
+const backgroundThemes={
+  beige:'#f3ddbb',
+  pink:'#fcc0c5',
+  blue:'#add4fd',
+  yellow:'#fef3c7',
+  green:'#81a969',
+  purple:'#d2c5fc',
+  gold:'#ffdf9a',
+  white:'#ffffff'
+};
+const DEFAULT_TEXT_COLOR="#000000";
+const DEFAULT_OUTLINE_COLOR="transparent";
+const DEFAULT_FONT="Poppins";
+
+const hexColorRegex=/^#([0-9A-Fa-f]{6})$/;
+
+function toggleCustomColor(selectEl,customEl,val){
+  customEl.classList.toggle('hidden',val!=='custom');
 }
 
-document.getElementById('wizard').addEventListener('click',e=>{
-  if(e.target.classList.contains('next')){ if(current<steps.length-1){current++; showStep(current);} }
-  if(e.target.classList.contains('back')){ if(current>0){current--; showStep(current);} }
+function syncColorInputs(picker,hex,val){
+  if(picker&&hex){
+    if(picker===document.activeElement){
+      hex.value=val;
+    }else if(hexColorRegex.test(val)){
+      picker.value=val;
+    }
+  }
+}
+
+function applyTextStyles(el,color,outline,font,bold,italic){
+  if(!el) return;
+  el.style.color=color;
+  el.style.fontFamily=`'${font}', sans-serif`;
+  el.style.fontWeight=bold?'bold':'normal';
+  el.style.fontStyle=italic?'italic':'normal';
+  if(outline==='transparent'){
+    el.style.textShadow='none';
+    el.style.webkitTextStroke='0';
+  }else{
+    el.style.textShadow=`-1px -1px 0 ${outline}, 1px -1px 0 ${outline}, -1px 1px 0 ${outline}, 1px 1px 0 ${outline}`;
+    el.style.webkitTextStroke=`1px ${outline}`;
+  }
+}
+
+function getColorValue(selectEl,hexEl,def){
+  const val=selectEl.value;
+  if(val==='custom'){
+    return hexEl.value?.trim()||def;
+  }
+  return val===''?def:(backgroundThemes[val]||val);
+}
+
+let updateTimeout;
+function updatePreview(){
+  clearTimeout(updateTimeout);
+  updateTimeout=setTimeout(()=>{
+    const bg=getColorValue(els.backgroundTheme,els.backgroundHex,'#f3ddbb');
+    const text=DEFAULT_TEXT_COLOR;
+    const outline=DEFAULT_OUTLINE_COLOR;
+    const font=DEFAULT_FONT;
+    const fontMain=els.fontMain.value||font;
+    const fontSub=els.fontSub.value||font;
+    const fontDate=els.fontDate.value||font;
+    const fontFrom=els.fontFrom.value||font;
+
+    const mainColor=getColorValue(els.mainTextColor,els.mainTextHex,text);
+    const mainOutline=getColorValue(els.mainOutlineColor,els.mainOutlineHex,outline);
+    const subColor=getColorValue(els.subTextColor,els.subTextHex,text);
+    const subOutline=getColorValue(els.subOutlineColor,els.subOutlineHex,outline);
+    const dateColor=getColorValue(els.dateTextColor,els.dateTextHex,text);
+    const dateOutline=getColorValue(els.dateOutlineColor,els.dateOutlineHex,outline);
+    const fromColor=getColorValue(els.fromTextColor,els.fromTextHex,text);
+    const fromOutline=getColorValue(els.fromOutlineColor,els.fromOutlineHex,outline);
+
+    const mainBold=els.mainBold.checked;
+    const mainItalic=els.mainItalic.checked;
+    const subBold=els.subBold.checked;
+    const subItalic=els.subItalic.checked;
+    const dateBold=els.dateBold.checked;
+    const dateItalic=els.dateItalic.checked;
+    const fromBold=els.fromBold.checked;
+    const fromItalic=els.fromItalic.checked;
+    const mainCaps=els.mainCaps.checked;
+    const subCaps=els.subCaps.checked;
+    const dateCaps=els.dateCaps.checked;
+    const fromCaps=els.fromCaps.checked;
+
+    els.previewBackground.style.backgroundColor=bg;
+    els.preview1Background.style.backgroundColor=bg;
+    els.preview2Background.style.backgroundColor=bg;
+
+    applyTextStyles(els.previewMain,mainColor,mainOutline,fontMain,mainBold,mainItalic);
+    applyTextStyles(els.previewSub,subColor,subOutline,fontSub,subBold,subItalic);
+    applyTextStyles(els.preview1Text,mainColor,mainOutline,fontMain,mainBold,mainItalic);
+    applyTextStyles(els.preview2Msg1,subColor,subOutline,fontSub,subBold,subItalic);
+    applyTextStyles(els.preview2Msg2,dateColor,dateOutline,fontDate,dateBold,dateItalic);
+    applyTextStyles(els.preview2Ending,fromColor,fromOutline,fontFrom,fromBold,fromItalic);
+
+    const mainRaw=els.mainHeadline.value.trim();
+    const main=mainCaps?mainRaw.toUpperCase():mainRaw;
+    els.previewMain.textContent=main||'Your Text Here';
+    els.preview1Text.textContent=main;
+    els.preview1Text.style.display=main?'block':'none';
+
+    const msg1Raw=els.message1.value.trim();
+    const msg1=subCaps?msg1Raw.toUpperCase():msg1Raw;
+    els.previewSub.textContent=msg1||'This will be the style for the reveal';
+    els.preview2Msg1.textContent=msg1;
+    els.preview2Msg1.style.display=msg1?'block':'none';
+
+    const msg2Raw=els.message2.value.trim();
+    const msg2=dateCaps?msg2Raw.toUpperCase():msg2Raw;
+    els.preview2Msg2.textContent=msg2;
+    els.preview2Msg2.style.display=msg2?'block':'none';
+
+    const img=els.photo.value.trim();
+    if(img){
+      els.preview2Photo.innerHTML=`<img src="${img}" class="max-h-40 mx-auto rounded-lg">`;
+      els.preview2Photo.style.display='block';
+    }else{
+      els.preview2Photo.innerHTML='';
+      els.preview2Photo.style.display='none';
+    }
+
+    const endRaw=els.ending.value.trim();
+    const end=fromCaps?endRaw.toUpperCase():endRaw;
+    els.preview2Ending.textContent=end;
+    els.preview2Ending.style.display=end?'block':'none';
+  },100);
+}
+[
+  'backgroundTheme',
+  'backgroundPicker',
+  'backgroundHex',
+  'textColor',
+  'textPicker',
+  'textHex',
+  'outlineColor',
+  'outlinePicker',
+  'outlineHex',
+  'fontFamily',
+  'fontMain',
+  'fontSub',
+  'fontDate',
+  'fontFrom',
+  'mainTextColor',
+  'mainTextPicker',
+  'mainTextHex',
+  'mainOutlineColor',
+  'mainOutlinePicker',
+  'mainOutlineHex',
+  'mainBold',
+  'mainItalic',
+  'mainCaps',
+  'subTextColor',
+  'subTextPicker',
+  'subTextHex',
+  'subOutlineColor',
+  'subOutlinePicker',
+  'subOutlineHex',
+  'subBold',
+  'subItalic',
+  'subCaps',
+  'dateTextColor',
+  'dateTextPicker',
+  'dateTextHex',
+  'dateOutlineColor',
+  'dateOutlinePicker',
+  'dateOutlineHex',
+  'dateBold',
+  'dateItalic',
+  'dateCaps',
+  'fromTextColor',
+  'fromTextPicker',
+  'fromTextHex',
+  'fromOutlineColor',
+  'fromOutlinePicker',
+  'fromOutlineHex',
+  'fromBold',
+  'fromItalic',
+  'fromCaps',
+  'mainHeadline',
+  'message1',
+  'message2',
+  'photo',
+  'ending'
+].forEach(id => {
+  const el=document.getElementById(id);
+  if(el){
+    el.addEventListener('input', updatePreview);
+    el.addEventListener('change', updatePreview);
+  }
 });
 
-document.getElementById('generate').addEventListener('click',()=>{
-  const params=new URLSearchParams();
-  const color=document.getElementById('color').value;
-  if(color) params.set('color',color);
-  const main=document.getElementById('main').value.trim();
-  if(main) params.set('main',main);
-  const fontMain=document.getElementById('fontMain').value;
-  if(fontMain) params.set('fontMain',fontMain);
-  const mainTextColor=document.getElementById('mainTextColor').value;
-  if(mainTextColor) params.set('mainTextColor',mainTextColor);
-  const mainOutlineColor=document.getElementById('mainOutlineColor').value;
-  if(mainOutlineColor) params.set('mainOutlineColor',mainOutlineColor);
-  if(document.getElementById('mainBold').checked) params.set('mainBold','1');
-  if(document.getElementById('mainItalic').checked) params.set('mainItalic','1');
-  if(document.getElementById('mainCaps').checked) params.set('mainCaps','1');
-
-  const sub=document.getElementById('sub').value.trim();
-  if(sub) params.set('sub',sub);
-  const fontSub=document.getElementById('fontSub').value;
-  if(fontSub) params.set('fontSub',fontSub);
-  const subTextColor=document.getElementById('subTextColor').value;
-  if(subTextColor) params.set('subTextColor',subTextColor);
-  const subOutlineColor=document.getElementById('subOutlineColor').value;
-  if(subOutlineColor) params.set('subOutlineColor',subOutlineColor);
-  if(document.getElementById('subBold').checked) params.set('subBold','1');
-  if(document.getElementById('subItalic').checked) params.set('subItalic','1');
-  if(document.getElementById('subCaps').checked) params.set('subCaps','1');
-
-  const from=document.getElementById('from').value.trim();
-  if(from) params.set('from',from);
-  const fontFrom=document.getElementById('fontFrom').value;
-  if(fontFrom) params.set('fontFrom',fontFrom);
-  const fromTextColor=document.getElementById('fromTextColor').value;
-  if(fromTextColor) params.set('fromTextColor',fromTextColor);
-  const fromOutlineColor=document.getElementById('fromOutlineColor').value;
-  if(fromOutlineColor) params.set('fromOutlineColor',fromOutlineColor);
-  if(document.getElementById('fromBold').checked) params.set('fromBold','1');
-  if(document.getElementById('fromItalic').checked) params.set('fromItalic','1');
-  if(document.getElementById('fromCaps').checked) params.set('fromCaps','1');
-
-  const photo=document.getElementById('photo').value.trim();
-  if(photo) params.set('photo',photo);
-
-  const url='https://customjc.netlify.app/?'+params.toString();
-  document.getElementById('resultUrl').value=url;
-  document.getElementById('result').style.display='block';
+els.backgroundTheme.addEventListener('change',e=>{
+  toggleCustomColor(els.backgroundTheme,document.getElementById('backgroundCustom'),e.target.value);
+  updatePreview();
+});
+if(els.textColor){
+  els.textColor.addEventListener('change', e => {
+    toggleCustomColor(els.textColor, document.getElementById('textCustom'), e.target.value);
+    updatePreview();
+  });
+}
+els.mainTextColor.addEventListener('change', e => {
+  toggleCustomColor(els.mainTextColor, document.getElementById('mainTextCustom'), e.target.value);
+  updatePreview();
+});
+els.mainOutlineColor.addEventListener('change', e => {
+  toggleCustomColor(els.mainOutlineColor, document.getElementById('mainOutlineCustom'), e.target.value);
+  updatePreview();
+});
+if(els.outlineColor){
+  els.outlineColor.addEventListener('change', e => {
+    toggleCustomColor(els.outlineColor, document.getElementById('outlineColorCustom'), e.target.value);
+    updatePreview();
+  });
+}
+els.subTextColor.addEventListener('change', e => {
+  toggleCustomColor(els.subTextColor, document.getElementById('subTextCustom'), e.target.value);
+  updatePreview();
+});
+els.subOutlineColor.addEventListener('change', e => {
+  toggleCustomColor(els.subOutlineColor, document.getElementById('subOutlineCustom'), e.target.value);
+  updatePreview();
+});
+els.dateTextColor.addEventListener('change', e => {
+  toggleCustomColor(els.dateTextColor, document.getElementById('dateTextCustom'), e.target.value);
+  updatePreview();
+});
+els.dateOutlineColor.addEventListener('change', e => {
+  toggleCustomColor(els.dateOutlineColor, document.getElementById('dateOutlineCustom'), e.target.value);
+  updatePreview();
+});
+els.fromTextColor.addEventListener('change', e => {
+  toggleCustomColor(els.fromTextColor, document.getElementById('fromTextCustom'), e.target.value);
+  updatePreview();
+});
+els.fromOutlineColor.addEventListener('change', e => {
+  toggleCustomColor(els.fromOutlineColor, document.getElementById('fromOutlineCustom'), e.target.value);
+  updatePreview();
 });
 
+[
+  ['backgroundPicker','backgroundHex'],
+  ['textPicker','textHex'],
+  ['outlinePicker','outlineHex'],
+  ['mainTextPicker','mainTextHex'],
+  ['mainOutlinePicker','mainOutlineHex'],
+  ['subTextPicker','subTextHex'],
+  ['subOutlinePicker','subOutlineHex'],
+  ['dateTextPicker','dateTextHex'],
+  ['dateOutlinePicker','dateOutlineHex'],
+  ['fromTextPicker','fromTextHex'],
+  ['fromOutlinePicker','fromOutlineHex']
+].forEach(([p,h])=>{
+  const picker=document.getElementById(p);
+  const hex=document.getElementById(h);
+  if(picker && hex){
+    picker.addEventListener('input',e=>{
+      syncColorInputs(picker,hex,e.target.value);
+      updatePreview();
+    });
+    hex.addEventListener('input',e=>{
+      syncColorInputs(picker,hex,e.target.value);
+      updatePreview();
+    });
+  }
+});
+
+updatePreview();
+const generateBtn=document.getElementById('generateBtn');
+const defaultText=generateBtn.textContent;
+const statusEl=document.getElementById('statusMsg');
+
+// ----- Wizard Step Navigation -----
+const steps=document.querySelectorAll('#revealForm .step');
+const progressEl=document.getElementById('progress');
+let currentStep=0;
+function showStep(i){
+  steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  progressEl.textContent=`Step ${i+1} of ${steps.length}`;
+  generateBtn.disabled=i!==steps.length-1;
+}
+document.querySelectorAll('#revealForm .next').forEach(b=>b.addEventListener('click',()=>{if(currentStep<steps.length-1){currentStep++;showStep(currentStep);}}));
+document.querySelectorAll('#revealForm .back').forEach(b=>b.addEventListener('click',()=>{if(currentStep>0){currentStep--;showStep(currentStep);}}));
 showStep(0);
+
+function showConfettiAt(x,y){
+  const colors=['#ffc700','#ff0000','#2ecc40','#0074D9','#B10DC9'];
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div');
+    d.className='confetti';
+    d.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+    d.style.left=x+'px';
+    d.style.top=y+'px';
+    const angle=Math.random()*2*Math.PI;
+    const dist=80+Math.random()*80;
+    d.style.setProperty('--dx',Math.cos(angle)*dist+'px');
+    d.style.setProperty('--dy',Math.sin(angle)*dist+'px');
+    document.body.appendChild(d);
+    d.addEventListener('animationend',()=>d.remove());
+  }
+}
+generateBtn.addEventListener('click',async e=>{
+  e.preventDefault();
+  generateBtn.disabled=true;
+  const originalText=generateBtn.textContent;
+  generateBtn.textContent='Generating…';
+  const baseTextColor = els.textColor ? getColorValue(els.textColor, els.textHex, '') : '';
+  const baseOutlineColor = els.outlineColor ? getColorValue(els.outlineColor, els.outlineHex, '') : '';
+  const params=new URLSearchParams({
+    color:getColorValue(els.backgroundTheme,els.backgroundHex,''),
+    textColor: DEFAULT_TEXT_COLOR,
+    outlineColor: DEFAULT_OUTLINE_COLOR,
+    font: DEFAULT_FONT,
+    fontMain:els.fontMain.value,
+    fontSub:els.fontSub.value,
+    fontDate:els.fontDate.value,
+    fontFrom:els.fontFrom.value,
+    main:els.mainHeadline.value.trim(),
+    sub:els.message1.value.trim(),
+    date:els.message2.value.trim(),
+    photo:els.photo.value.trim(),
+    from:els.ending.value.trim(),
+    mainTextColor:getColorValue(els.mainTextColor,els.mainTextHex,''),
+    mainOutlineColor:getColorValue(els.mainOutlineColor,els.mainOutlineHex,''),
+    subTextColor:getColorValue(els.subTextColor,els.subTextHex,baseTextColor),
+    subOutlineColor:getColorValue(els.subOutlineColor,els.subOutlineHex,baseOutlineColor),
+    dateTextColor:getColorValue(els.dateTextColor,els.dateTextHex,baseTextColor),
+    dateOutlineColor:getColorValue(els.dateOutlineColor,els.dateOutlineHex,baseOutlineColor),
+    fromTextColor:getColorValue(els.fromTextColor,els.fromTextHex,baseTextColor),
+    fromOutlineColor:getColorValue(els.fromOutlineColor,els.fromOutlineHex,baseOutlineColor),
+    mainBold:els.mainBold.checked?1:0,
+    mainItalic:els.mainItalic.checked?1:0,
+    mainCaps:els.mainCaps.checked?1:0,
+    subBold:els.subBold.checked?1:0,
+    subItalic:els.subItalic.checked?1:0,
+    subCaps:els.subCaps.checked?1:0,
+    dateBold:els.dateBold.checked?1:0,
+    dateItalic:els.dateItalic.checked?1:0,
+    dateCaps:els.dateCaps.checked?1:0,
+    fromBold:els.fromBold.checked?1:0,
+    fromItalic:els.fromItalic.checked?1:0,
+    fromCaps:els.fromCaps.checked?1:0
+  });
+  const base='https://bigreveal.joyjotstudio.store/';
+  let full=`${base}?${params.toString()}`;
+  let shortened=false;
+  try{
+    const r=await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(full)}`);
+    if(r.ok){
+      const short=await r.text();
+      if(short.startsWith('http')){full=short;shortened=true;}
+    }
+  }catch{}
+  statusEl.textContent=shortened?'Short link created.':'Using full link.';
+  const heading=document.getElementById('resultHeading');
+  const sub=document.getElementById('resultSub');
+  if(shortened){
+    heading.textContent='Your Short Reveal URL is Ready!';
+    sub.classList.remove('hidden');
+  }else{
+    heading.textContent='Your Reveal URL is Ready!';
+    sub.classList.add('hidden');
+  }
+  setTimeout(()=>{statusEl.textContent='';},3000);
+  generateBtn.disabled=false;
+  generateBtn.textContent=originalText;
+  document.getElementById('generatedUrl').value=full;
+  document.getElementById('previewLink').href=full;
+  document.getElementById('urlResult').classList.remove('hidden');
+});
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const btn=document.getElementById('copyBtn');
+  const url=document.getElementById('generatedUrl').value;
+  try{await navigator.clipboard.writeText(url);}catch{const inp=document.getElementById('generatedUrl');inp.select();document.execCommand('copy');}
+  const r=btn.getBoundingClientRect();
+  showConfettiAt(r.left+r.width/2,r.top+r.height/2);
+  const original=btn.textContent;
+  btn.textContent='Copied!';
+  setTimeout(()=>{btn.textContent=original;},1500);
+});
+document.getElementById('newBtn').addEventListener('click',()=>{
+  document.getElementById('revealForm').reset();
+  document.getElementById('urlResult').classList.add('hidden');
+  statusEl.textContent='';
+  generateBtn.disabled=false;
+  generateBtn.textContent=defaultText;
+  updatePreview();
+});
 </script>
 </body>
 </html>
