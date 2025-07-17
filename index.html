@@ -103,102 +103,131 @@
         <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
       </div>
     </div>
-    <!-- Section 2 -->
-    <div class="form-step bg-white rounded-2xl shadow-xl p-8" id="section2">
-      <div class="flex items-center mb-6">
-        <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">B</div>
-        <h2 class="text-2xl font-bold text-gray-800">Page 1</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h2 class="form-step-question">What do you want your first big message to say?</h2>
-          <label for="mainHeadline" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
-          <input id="mainHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="We're Expecting!" required />
-          <h2 class="form-step-question">Which font should this message use?</h2>
-          <label for="fontMain" class="block text-sm font-semibold text-gray-700 mt-2 mb-2">Main Headline Font</label>
-          <select id="fontMain" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-            <option value="Poppins">Poppins</option>
-            <option value="Playfair Display">Playfair Display</option>
-            <option value="Dancing Script">Dancing Script</option>
-            <option value="Montserrat">Montserrat</option>
-            <option value="Great Vibes">Great Vibes</option>
-            <option value="Roboto">Roboto</option>
-            <option value="Lora">Lora</option>
-            <option value="Pacifico">Pacifico</option>
-            <option value="Crimson Text">Crimson Text</option>
-            <option value="Sacramento">Sacramento</option>
-          </select>
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <div>
-              <h2 class="form-step-question">What color should the text be?</h2>
-              <label for="mainTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-              <select id="mainTextColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
-                <option value="">Choose a color...</option>
-                <option value="#000000">Black</option>
-                <option value="#ffffff">White</option>
-                <option value="#374151">Dark Gray</option>
-                <option value="#dc2626">Red</option>
-                <option value="#ea580c">Orange</option>
-                <option value="#ca8a04">Yellow</option>
-                <option value="#16a34a">Green</option>
-                <option value="#2563eb">Blue</option>
-                <option value="#7c3aed">Purple</option>
-                <option value="#ff69b4">Pink</option>
-                <option value="custom">Custom Color</option>
-              </select>
-              <div id="mainTextCustom" class="hidden">
-                <div class="flex items-center space-x-3">
-                  <input type="color" id="mainTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
-                  <input type="text" id="mainTextHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
-                </div>
-              </div>
-            </div>
-            <div>
-              <h2 class="form-step-question">What outline color should it use?</h2>
-              <label for="mainOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-              <select id="mainOutlineColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
-                <option value="">Use Default</option>
-                <option value="transparent">None</option>
-                <option value="#000000">Black</option>
-                <option value="#ffffff">White</option>
-                <option value="#374151">Dark Gray</option>
-                <option value="#dc2626">Red</option>
-                <option value="#ea580c">Orange</option>
-                <option value="#ca8a04">Yellow</option>
-                <option value="#16a34a">Green</option>
-                <option value="#2563eb">Blue</option>
-                <option value="#7c3aed">Purple</option>
-                <option value="#ff69b4">Pink</option>
-                <option value="custom">Custom Color</option>
-              </select>
-              <div id="mainOutlineCustom" class="hidden">
-                <div class="flex items-center space-x-3">
-                  <input type="color" id="mainOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
-                  <input type="text" id="mainOutlineHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <h2 class="form-step-question">Should any of these styles apply?</h2>
-          <div class="flex items-center space-x-4 mt-2">
-            <label class="text-xs"><input id="mainBold" type="checkbox" class="mr-1" />Bold</label>
-            <label class="text-xs"><input id="mainItalic" type="checkbox" class="mr-1" />Italic</label>
-            <label class="text-xs"><input id="mainCaps" type="checkbox" class="mr-1" checked />Caps</label>
-          </div>
-        </div>
-        <div class="flex flex-col items-center order-first md:order-none">
-          <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 1</h3>
-          <div id="preview1Background" class="flex items-center justify-center rounded-lg w-fit max-w-[8rem] p-2" style="background-color:#f3f3f3;">
-            <h1 id="preview1Text" class="text-4xl font-bold break-words text-center" style="display:none"></h1>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="flex justify-between mt-4">
-        <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
-        <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
-      </div>
       <!-- Section 3 -->
+<div class="form-step bg-white rounded-2xl shadow-xl p-8" id="mainHeadlineStep">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">B</div>
+    <h2 class="text-2xl font-bold text-gray-800">Main Headline</h2>
+  </div>
+  <h2 class="form-step-question">What do you want your first big message to say?</h2>
+  <label for="mainHeadline" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline</label>
+  <input id="mainHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="We're Expecting!" required />
+  <div class="flex flex-col items-center mt-4">
+    <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 1</h3>
+    <div id="preview1Background" class="flex items-center justify-center rounded-lg w-fit max-w-[8rem] p-2" style="background-color:#f3f3f3;">
+      <h1 id="preview1Text" class="text-4xl font-bold break-words text-center" style="display:none"></h1>
+    </div>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+    <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+  </div>
+</div>
+<div class="form-step bg-white rounded-2xl shadow-xl p-8" id="mainFontStep">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">C</div>
+    <h2 class="text-2xl font-bold text-gray-800">Headline Font</h2>
+  </div>
+  <h2 class="form-step-question">Which font should this message use?</h2>
+  <label for="fontMain" class="block text-sm font-semibold text-gray-700 mb-2">Main Headline Font</label>
+  <select id="fontMain" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+    <option value="Poppins">Poppins</option>
+    <option value="Playfair Display">Playfair Display</option>
+    <option value="Dancing Script">Dancing Script</option>
+    <option value="Montserrat">Montserrat</option>
+    <option value="Great Vibes">Great Vibes</option>
+    <option value="Roboto">Roboto</option>
+    <option value="Lora">Lora</option>
+    <option value="Pacifico">Pacifico</option>
+    <option value="Crimson Text">Crimson Text</option>
+    <option value="Sacramento">Sacramento</option>
+  </select>
+  <div class="flex justify-between mt-4">
+    <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+    <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+  </div>
+</div>
+<div class="form-step bg-white rounded-2xl shadow-xl p-8" id="mainColorStep">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">D</div>
+    <h2 class="text-2xl font-bold text-gray-800">Headline Text Color</h2>
+  </div>
+  <h2 class="form-step-question">What color should the text be?</h2>
+  <label for="mainTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+  <select id="mainTextColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+    <option value="">Choose a color...</option>
+    <option value="#000000">Black</option>
+    <option value="#ffffff">White</option>
+    <option value="#374151">Dark Gray</option>
+    <option value="#dc2626">Red</option>
+    <option value="#ea580c">Orange</option>
+    <option value="#ca8a04">Yellow</option>
+    <option value="#16a34a">Green</option>
+    <option value="#2563eb">Blue</option>
+    <option value="#7c3aed">Purple</option>
+    <option value="#ff69b4">Pink</option>
+    <option value="custom">Custom Color</option>
+  </select>
+  <div id="mainTextCustom" class="hidden">
+    <div class="flex items-center space-x-3">
+      <input type="color" id="mainTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+      <input type="text" id="mainTextHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
+    </div>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+    <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+  </div>
+</div>
+<div class="form-step bg-white rounded-2xl shadow-xl p-8" id="mainOutlineStep">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">E</div>
+    <h2 class="text-2xl font-bold text-gray-800">Headline Outline Color</h2>
+  </div>
+  <h2 class="form-step-question">What outline color should it use?</h2>
+  <label for="mainOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+  <select id="mainOutlineColor" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-1">
+    <option value="">Use Default</option>
+    <option value="transparent">None</option>
+    <option value="#000000">Black</option>
+    <option value="#ffffff">White</option>
+    <option value="#374151">Dark Gray</option>
+    <option value="#dc2626">Red</option>
+    <option value="#ea580c">Orange</option>
+    <option value="#ca8a04">Yellow</option>
+    <option value="#16a34a">Green</option>
+    <option value="#2563eb">Blue</option>
+    <option value="#7c3aed">Purple</option>
+    <option value="#ff69b4">Pink</option>
+    <option value="custom">Custom Color</option>
+  </select>
+  <div id="mainOutlineCustom" class="hidden">
+    <div class="flex items-center space-x-3">
+      <input type="color" id="mainOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+      <input type="text" id="mainOutlineHex" class="flex-1 px-4 py-3 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+    </div>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+    <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+  </div>
+</div>
+<div class="form-step bg-white rounded-2xl shadow-xl p-8" id="mainStyleStep">
+  <div class="flex items-center mb-6">
+    <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">F</div>
+    <h2 class="text-2xl font-bold text-gray-800">Headline Styling</h2>
+  </div>
+  <h2 class="form-step-question">Should any of these styles apply?</h2>
+  <div class="flex items-center space-x-4 mt-2">
+    <label class="text-xs"><input id="mainBold" type="checkbox" class="mr-1" />Bold</label>
+    <label class="text-xs"><input id="mainItalic" type="checkbox" class="mr-1" />Italic</label>
+    <label class="text-xs"><input id="mainCaps" type="checkbox" class="mr-1" checked />Caps</label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+    <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+  </div>
+</div>
     <div class="form-step bg-white rounded-2xl shadow-xl p-8" id="section3">
       <div class="flex items-center mb-6">
         <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">C</div>
