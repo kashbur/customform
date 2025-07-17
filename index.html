@@ -13,6 +13,8 @@
   input:focus, select:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,184,141,0.2); border-color:#ffb88d; }
   .step { display:none; }
   .step.active { display:block; }
+  .form-step { display:none; }
+  .form-step.active { display:block; }
   .confetti {
     position: fixed;
     width: 8px;
@@ -194,236 +196,245 @@
         <div class="rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3" style="background-color:#ffb88d;color:#1f2937;">C</div>
         <h2 class="text-2xl font-bold text-gray-800">Page 2</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="space-y-8">
-        <details class="mb-4">
-          <summary class="font-semibold text-lg cursor-pointer">Message 1</summary>
-          <div class="mt-4 space-y-4">
-          <label for="message1" class="block text-sm font-semibold text-gray-700 mb-2">Message 1</label>
-          <input id="message1" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Baby Johnson" required />
-          <label for="fontSub" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Message 1 Font</label>
-          <select id="fontSub" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-              <option value="Poppins">Poppins</option>
-              <option value="Playfair Display">Playfair Display</option>
-              <option value="Dancing Script">Dancing Script</option>
-              <option value="Montserrat">Montserrat</option>
-              <option value="Great Vibes">Great Vibes</option>
-              <option value="Roboto">Roboto</option>
-              <option value="Lora">Lora</option>
-              <option value="Pacifico">Pacifico</option>
-              <option value="Crimson Text">Crimson Text</option>
-              <option value="Sacramento">Sacramento</option>
-            </select>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-              <div>
-                <label for="subTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <select id="subTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="subTextCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="subTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
-                    <input type="text" id="subTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label for="subOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <select id="subOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="transparent">None</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="subOutlineCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="subOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
-                    <input type="text" id="subOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex items-center space-x-4 mt-2">
-              <label class="text-xs"><input id="subBold" type="checkbox" class="mr-1" />Bold</label>
-              <label class="text-xs"><input id="subItalic" type="checkbox" class="mr-1" />Italic</label>
-              <label class="text-xs"><input id="subCaps" type="checkbox" class="mr-1" checked />Caps</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="space-y-8">
+    <div class="form-step active" id="page2Step1">
+      <h3 class="font-semibold text-lg mb-2">Message 1</h3>
+      <div class="mb-4 text-sm text-gray-600">
+        <p class="font-semibold">Guiding Questions</p>
+        <ul class="list-disc pl-5">
+          <li>Who are you announcing?</li>
+          <li>Use a nickname or last name?</li>
+        </ul>
+      </div>
+      <label for="message1" class="block text-sm font-semibold text-gray-700 mb-2">Message 1</label>
+      <input id="message1" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Baby Johnson" required />
+      <label for="fontSub" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Message 1 Font</label>
+      <select id="fontSub" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+        <option value="Poppins">Poppins</option>
+        <option value="Playfair Display">Playfair Display</option>
+        <option value="Dancing Script">Dancing Script</option>
+        <option value="Montserrat">Montserrat</option>
+        <option value="Great Vibes">Great Vibes</option>
+        <option value="Roboto">Roboto</option>
+        <option value="Lora">Lora</option>
+        <option value="Pacifico">Pacifico</option>
+        <option value="Crimson Text">Crimson Text</option>
+        <option value="Sacramento">Sacramento</option>
+      </select>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+        <div>
+          <label for="subTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+          <select id="subTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+            <option value="">Use Default</option>
+            <option value="#000000">Black</option>
+            <option value="#ffffff">White</option>
+            <option value="#374151">Dark Gray</option>
+            <option value="#dc2626">Red</option>
+            <option value="#ea580c">Orange</option>
+            <option value="#ca8a04">Yellow</option>
+            <option value="#16a34a">Green</option>
+            <option value="#2563eb">Blue</option>
+            <option value="#7c3aed">Purple</option>
+            <option value="#ff69b4">Pink</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="subTextCustom" class="hidden">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="subTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+              <input type="text" id="subTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
             </div>
           </div>
-        </details>
-        <hr class="my-6">
-        <details class="mb-4">
-          <summary class="font-semibold text-lg cursor-pointer">Message 2 (optional)</summary>
-          <div class="mt-4 space-y-4">
+        </div>
+        <div>
+          <label for="subOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+          <select id="subOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+            <option value="">Use Default</option>
+            <option value="transparent">None</option>
+            <option value="#000000">Black</option>
+            <option value="#ffffff">White</option>
+            <option value="#374151">Dark Gray</option>
+            <option value="#dc2626">Red</option>
+            <option value="#ea580c">Orange</option>
+            <option value="#ca8a04">Yellow</option>
+            <option value="#16a34a">Green</option>
+            <option value="#2563eb">Blue</option>
+            <option value="#7c3aed">Purple</option>
+            <option value="#ff69b4">Pink</option>
+            <option value="custom">Custom Color</option>
+          </select>
+          <div id="subOutlineCustom" class="hidden">
+            <div class="flex items-center space-x-3">
+              <input type="color" id="subOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+              <input type="text" id="subOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4 mt-2">
+        <label class="text-xs"><input id="subBold" type="checkbox" class="mr-1" />Bold</label>
+        <label class="text-xs"><input id="subItalic" type="checkbox" class="mr-1" />Italic</label>
+        <label class="text-xs"><input id="subCaps" type="checkbox" class="mr-1" checked />Caps</label>
+      </div>
+      <div class="flex justify-end mt-4">
+        <button type="button" class="form-next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Continue</button>
+      </div>
+    </div>
+
+    <div class="form-step" id="page2Step2">
+      <details class="mb-4">
+        <summary class="font-semibold text-lg cursor-pointer">Message 2 (optional)</summary>
+        <div class="mt-4 space-y-4">
           <label for="message2" class="block text-sm font-semibold text-gray-700 mb-2">Message 2 (optional)</label>
           <input id="message2" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Coming soon!" />
           <label for="fontDate" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Message 2 Font</label>
           <select id="fontDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-              <option value="Poppins">Poppins</option>
-              <option value="Playfair Display">Playfair Display</option>
-              <option value="Dancing Script">Dancing Script</option>
-              <option value="Montserrat">Montserrat</option>
-              <option value="Great Vibes">Great Vibes</option>
-              <option value="Roboto">Roboto</option>
-              <option value="Lora">Lora</option>
-              <option value="Pacifico">Pacifico</option>
-              <option value="Crimson Text">Crimson Text</option>
-              <option value="Sacramento">Sacramento</option>
-            </select>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-              <div>
-                <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="dateTextCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
-                    <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="transparent">None</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="dateOutlineCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
-                    <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
-                  </div>
+            <option value="Poppins">Poppins</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Great Vibes">Great Vibes</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Lora">Lora</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Crimson Text">Crimson Text</option>
+            <option value="Sacramento">Sacramento</option>
+          </select>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+            <div>
+              <label for="dateTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+              <select id="dateTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                <option value="">Use Default</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="dateTextCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="dateTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                  <input type="text" id="dateTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
                 </div>
               </div>
             </div>
-            <div class="flex items-center space-x-4 mt-2">
-              <label class="text-xs"><input id="dateBold" type="checkbox" class="mr-1" />Bold</label>
-              <label class="text-xs"><input id="dateItalic" type="checkbox" class="mr-1" />Italic</label>
-              <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
+            <div>
+              <label for="dateOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+              <select id="dateOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                <option value="">Use Default</option>
+                <option value="transparent">None</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="dateOutlineCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="dateOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                  <input type="text" id="dateOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                </div>
+              </div>
             </div>
           </div>
-        </details>
-        <hr class="my-6">
-        <details class="mb-4">
-          <summary class="font-semibold text-lg cursor-pointer">Ending Message (optional)</summary>
-          <div class="mt-4 space-y-4">
+          <div class="flex items-center space-x-4 mt-2">
+            <label class="text-xs"><input id="dateBold" type="checkbox" class="mr-1" />Bold</label>
+            <label class="text-xs"><input id="dateItalic" type="checkbox" class="mr-1" />Italic</label>
+            <label class="text-xs"><input id="dateCaps" type="checkbox" class="mr-1" />Caps</label>
+          </div>
+        </div>
+      </details>
+      <hr class="my-6">
+      <details class="mb-4">
+        <summary class="font-semibold text-lg cursor-pointer">Ending Message (optional)</summary>
+        <div class="mt-4 space-y-4">
           <label for="ending" class="block text-sm font-semibold text-gray-700 mb-2">Ending Message (optional)</label>
           <input id="ending" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Love, The Johnsons" />
           <label for="fontFrom" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">Final Message Font</label>
           <select id="fontFrom" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-              <option value="Poppins">Poppins</option>
-              <option value="Playfair Display">Playfair Display</option>
-              <option value="Dancing Script">Dancing Script</option>
-              <option value="Montserrat">Montserrat</option>
-              <option value="Great Vibes">Great Vibes</option>
-              <option value="Roboto">Roboto</option>
-              <option value="Lora">Lora</option>
-              <option value="Pacifico">Pacifico</option>
-              <option value="Crimson Text">Crimson Text</option>
-              <option value="Sacramento">Sacramento</option>
-            </select>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-              <div>
-                <label for="fromTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
-                <select id="fromTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="fromTextCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="fromTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
-                    <input type="text" id="fromTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label for="fromOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
-                <select id="fromOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
-                  <option value="">Use Default</option>
-                  <option value="transparent">None</option>
-                  <option value="#000000">Black</option>
-                  <option value="#ffffff">White</option>
-                  <option value="#374151">Dark Gray</option>
-                  <option value="#dc2626">Red</option>
-                  <option value="#ea580c">Orange</option>
-                  <option value="#ca8a04">Yellow</option>
-                  <option value="#16a34a">Green</option>
-                  <option value="#2563eb">Blue</option>
-                  <option value="#7c3aed">Purple</option>
-                  <option value="#ff69b4">Pink</option>
-                  <option value="custom">Custom Color</option>
-                </select>
-                <div id="fromOutlineCustom" class="hidden">
-                  <div class="flex items-center space-x-3">
-                    <input type="color" id="fromOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
-                    <input type="text" id="fromOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
-                  </div>
+            <option value="Poppins">Poppins</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Great Vibes">Great Vibes</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Lora">Lora</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Crimson Text">Crimson Text</option>
+            <option value="Sacramento">Sacramento</option>
+          </select>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+            <div>
+              <label for="fromTextColor" class="block text-xs font-semibold text-gray-700 mb-1">Text Color</label>
+              <select id="fromTextColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                <option value="">Use Default</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="fromTextCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="fromTextPicker" class="w-12 h-12 border rounded-lg" value="#000000" />
+                  <input type="text" id="fromTextHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#000000" />
                 </div>
               </div>
             </div>
-            <div class="flex items-center space-x-4 mt-2">
-              <label class="text-xs"><input id="fromBold" type="checkbox" class="mr-1" />Bold</label>
-              <label class="text-xs"><input id="fromItalic" type="checkbox" class="mr-1" />Italic</label>
-          <label class="text-xs"><input id="fromCaps" type="checkbox" class="mr-1" />Caps</label>
+            <div>
+              <label for="fromOutlineColor" class="block text-xs font-semibold text-gray-700 mb-1">Outline Color</label>
+              <select id="fromOutlineColor" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-2">
+                <option value="">Use Default</option>
+                <option value="transparent">None</option>
+                <option value="#000000">Black</option>
+                <option value="#ffffff">White</option>
+                <option value="#374151">Dark Gray</option>
+                <option value="#dc2626">Red</option>
+                <option value="#ea580c">Orange</option>
+                <option value="#ca8a04">Yellow</option>
+                <option value="#16a34a">Green</option>
+                <option value="#2563eb">Blue</option>
+                <option value="#7c3aed">Purple</option>
+                <option value="#ff69b4">Pink</option>
+                <option value="custom">Custom Color</option>
+              </select>
+              <div id="fromOutlineCustom" class="hidden">
+                <div class="flex items-center space-x-3">
+                  <input type="color" id="fromOutlinePicker" class="w-12 h-12 border rounded-lg" value="#ffffff" />
+                  <input type="text" id="fromOutlineHex" class="flex-1 px-4 py-2 border rounded-lg" pattern="^#([0-9A-Fa-f]{6})$" placeholder="#ffffff" />
+                </div>
+              </div>
             </div>
           </div>
-        </details>
-        <hr class="my-6">
-        <details class="mb-4">
-          <summary class="font-semibold text-lg cursor-pointer">Photo Upload (optional)</summary>
-          <div class="mt-4 space-y-4">
+          <div class="flex items-center space-x-4 mt-2">
+            <label class="text-xs"><input id="fromBold" type="checkbox" class="mr-1" />Bold</label>
+            <label class="text-xs"><input id="fromItalic" type="checkbox" class="mr-1" />Italic</label>
+            <label class="text-xs"><input id="fromCaps" type="checkbox" class="mr-1" />Caps</label>
+          </div>
+        </div>
+      </details>
+      <hr class="my-6">
+      <details class="mb-4">
+        <summary class="font-semibold text-lg cursor-pointer">Photo Upload (optional)</summary>
+        <div class="mt-4 space-y-4">
           <label for="photo" class="block text-sm font-semibold text-gray-700 mb-2">
             Photo URL <span class="text-gray-400">(optional)</span>
             <span class="inline-block relative ml-1 group cursor-help">
@@ -439,17 +450,10 @@
               </div>
             </span>
           </label>
-          <input
-            type="url"
-            id="photo"
-            name="photo"
-            placeholder="https://i.imgur.com/yourimage.jpg"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all"
-          >
+          <input type="url" id="photo" name="photo" placeholder="https://i.imgur.com/yourimage.jpg" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 transition-all" >
           <p class="text-xs text-gray-500 mt-1">Upload to Imgur, Postimg, etc., and paste the direct link here.</p>
-          </div>
-        </details>
-      </div>
+        </div>
+      </details>
       <div class="flex flex-col items-center order-first md:order-none">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Live Preview — Page 2</h3>
         <div id="preview2Background" class="flex items-center justify-center rounded-lg w-fit max-w-[8rem] p-2" style="background-color:#f3f3f3;">
@@ -461,7 +465,16 @@
           </div>
         </div>
       </div>
+      <div class="flex justify-between mt-4">
+        <button type="button" class="form-back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+        <div>
+          <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
+          <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
     <div class="flex justify-between mt-4">
       <button type="button" class="back px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Back</button>
       <button type="button" class="next px-4 py-2 rounded bg-[#c0dcca] text-gray-800 hover:bg-[#a8d0b5]">Next</button>
@@ -846,6 +859,14 @@ function showStep(i){
 document.querySelectorAll('#revealForm .next').forEach(b=>b.addEventListener('click',()=>{if(currentStep<steps.length-1){currentStep++;showStep(currentStep);}}));
 document.querySelectorAll('#revealForm .back').forEach(b=>b.addEventListener('click',()=>{if(currentStep>0){currentStep--;showStep(currentStep);}}));
 showStep(0);
+const formSteps=document.querySelectorAll("#section3 .form-step");
+let currentFormStep=0;
+function showFormStep(i){
+  formSteps.forEach((s,idx)=>s.classList.toggle("active",idx===i));
+}
+document.querySelectorAll("#section3 .form-next").forEach(b=>b.addEventListener("click",()=>{if(currentFormStep<formSteps.length-1){currentFormStep++;showFormStep(currentFormStep);}}));
+document.querySelectorAll("#section3 .form-back").forEach(b=>b.addEventListener("click",()=>{if(currentFormStep>0){currentFormStep--;showFormStep(currentFormStep);}}));
+showFormStep(0);
 
 function showConfettiAt(x,y){
   const colors=['#ffc700','#ff0000','#2ecc40','#0074D9','#B10DC9'];
